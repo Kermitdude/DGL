@@ -1,0 +1,20 @@
+propel:
+  database:
+      connections:
+          dgl:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\DebugPDO
+              dsn: "mysql:host=localhost;port=3306;dbname=dgl"
+              user: root
+              password:
+  runtime:
+      defaultConnection: dgl
+      connections:
+          - dgl
+  generator:
+      namespaceAutoPackage: false
+      defaultConnection: dgl
+      connections:
+          - dgl  
+  paths:
+      phpDir: app/lib

@@ -1,0 +1,27 @@
+{
+    "name": "DGL/DigitalGaming",
+    "description": "The Digital Gaming League website",
+    "version": "1.0",
+    "type": "project",
+    "homepage": "http://thedgl.org",
+    "time": "2015-03-01",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dan Curry",
+            "email": "aita@thedgl.org",
+            "homepage": "http://www.thedgl.org",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+		"propel/propel": "~2.0@dev",
+		"monolog/monolog": "~1.2",
+		"klein/klein": "~2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "DigitalGaming\\": ["app/lib", "app/lib/Controllers"]
+        }
+    }
+}
