@@ -13,6 +13,7 @@ class AppController
 		"DigitalGaming\ElementsController",
 		"DigitalGaming\GamesController", 
 		"DigitalGaming\AdminController", 
+		"DigitalGaming\WatchController", 
 		"DigitalGaming\UsersController", 
 		"DigitalGaming\IndexController");
     protected $controller        = self::DEFAULT_CONTROLLER;

@@ -43,7 +43,7 @@
 				
 			<!-- Watch -->
 				<li id="navbar-watch" class="navbar-hover">
-					<a href="/watch" class="dropdown-toggle" data-toggle="dropdown">Watch <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+					<a href="/watch">Watch <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
 					
 				<!-- Hover -->
 					<nav class="container-fluid">

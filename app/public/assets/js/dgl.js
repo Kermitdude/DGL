@@ -89,6 +89,10 @@ function DGL_nav_mapRoutes()
 	DGL_nav_setRoute('/games', 'GamesController', 'index', '#navbar-games');
 	DGL_nav_setRoute('/games/:game', 'GamesController', 'view', '#navbar-games');
 	DGL_nav_setRoute('/games/:game/season/:season', 'GamesController', 'season', '#navbar-games');
+	DGL_nav_setRoute('/watch', 'WatchController', 'index', '#navbar-watch');
+	DGL_nav_setRoute('/watch/live/', 'WatchController', 'live', '#navbar-watch');
+	DGL_nav_setRoute('/watch/recent/', 'WatchController', 'recent', '#navbar-watch');
+	DGL_nav_setRoute('/watch/game/:game', 'WatchController', 'game', '#navbar-watch');
 	DGL_nav_setRoute('/admin', 'AdminController', 'index', '#navbar-admin');
 	DGL_nav_setRoute('/admin/users', 'AdminController', 'users', '#navbar-admin');
 	DGL_nav_setRoute('*', null, null);
