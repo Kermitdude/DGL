@@ -27,5 +27,7 @@ but there is added security in having a front controller reroute to pages not ac
 Modules/scripts/packages used:
 
 Pace.js (shows a loading bar on AJAX requests)
+
 Gridster.js (shows a drag-drop grid)
+
 Page.js (routes ajax requests)
