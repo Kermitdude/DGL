@@ -12,6 +12,7 @@
 @import "_footer.firefly";
 @import "_admin.firefly";
 @import "_pace.firefly";
+@import "_home.firefly";
 
 html 
 {
@@ -21,6 +22,20 @@ html
 
 body
 {
-	background: $charcoal;
+	@include background(
+		radial-gradient(400px 300px, lighten($charcoal,40) 10px, transparent 600px),
+		linear-gradient(45deg, $charcoal, lighten($charcoal, 30)));
 	margin-bottom: $footer-height;
+}
+
+main
+{
+	margin-top: -50px; // Hack because we don't have a responsive footer yet. Replace this!
+	
+	#content
+	{
+		//@include box-shadow(rgba(black, 0.4) 0 0 25px, rgba(black, 0.2) 0 0 3px 1px inset);
+		background: transparentize($charcoal, .65);
+		border: 1px solid transparentize($charcoal, .5)		
+	}
 }

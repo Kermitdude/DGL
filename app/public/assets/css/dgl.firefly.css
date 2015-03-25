@@ -8,57 +8,59 @@
 /* line 4, sass/_header.firefly.scss */
 #logo {
   position: absolute;
-  width: 80px;
-  margin-left: 80px;
+  top: 0px;
+  left: 50%;
+  width: 100px;
+  margin-left: -50px;
 }
 
-/* line 11, sass/_header.firefly.scss */
+/* line 13, sass/_header.firefly.scss */
 header nav {
   height: 75px;
 }
-/* line 15, sass/_header.firefly.scss */
+/* line 17, sass/_header.firefly.scss */
 header nav .navbar-nav:first-child > li {
   border-right: 1px solid #43434b;
 }
-/* line 18, sass/_header.firefly.scss */
+/* line 20, sass/_header.firefly.scss */
 header nav .navbar-nav:first-child > li:last-child {
   border-right: none;
 }
-/* line 23, sass/_header.firefly.scss */
+/* line 25, sass/_header.firefly.scss */
 header nav .navbar-nav > li {
   text-transform: uppercase;
   font-size: 1.5rem;
 }
-/* line 27, sass/_header.firefly.scss */
+/* line 29, sass/_header.firefly.scss */
 header nav .navbar-nav > li > a {
   line-height: 74px;
   height: 74px;
   padding-top: 0;
 }
-/* line 33, sass/_header.firefly.scss */
+/* line 35, sass/_header.firefly.scss */
 header nav .navbar-nav > li > a span {
   color: #f26222;
 }
-/* line 39, sass/_header.firefly.scss */
+/* line 41, sass/_header.firefly.scss */
 header nav .navbar-form {
   margin-top: 20px;
 }
-/* line 43, sass/_header.firefly.scss */
+/* line 45, sass/_header.firefly.scss */
 header nav .navbar-form input {
   background-color: #131315;
   color: #ebebe7;
   border: 1px solid #5c5c65;
 }
-/* line 53, sass/_header.firefly.scss */
+/* line 55, sass/_header.firefly.scss */
 header nav .navbar-hover:hover {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2E0MzkwYSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2YyNjIyMiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
 }
-/* line 57, sass/_header.firefly.scss */
+/* line 59, sass/_header.firefly.scss */
 header nav .navbar-hover:hover > a {
   color: white;
   text-shadow: 1px 1px 1px black;
 }
-/* line 63, sass/_header.firefly.scss */
+/* line 65, sass/_header.firefly.scss */
 header nav .navbar-hover nav {
   display: none;
   position: absolute;
@@ -69,18 +71,18 @@ header nav .navbar-hover nav {
   background: rgba(19, 19, 21, 0.95);
   border-bottom: 1px solid #f26222;
 }
-/* line 74, sass/_header.firefly.scss */
+/* line 76, sass/_header.firefly.scss */
 header nav .navbar-hover nav ul {
   padding: 0px;
 }
-/* line 77, sass/_header.firefly.scss */
+/* line 79, sass/_header.firefly.scss */
 header nav .navbar-hover nav ul header {
   background: #f26222;
   padding: 2px 2px 2px 10px;
   color: black;
   font-weight: bold;
 }
-/* line 84, sass/_header.firefly.scss */
+/* line 86, sass/_header.firefly.scss */
 header nav .navbar-hover nav ul li {
   list-style-type: none;
   padding: 2px 2px 2px 10px;
@@ -92,9 +94,44 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 100px;
+  padding-top: 20px;
+  height: 120px;
   background-color: #1f1f22;
   color: #ebebe7;
+  overflow: hidden;
+}
+/* line 15, sass/_footer.firefly.scss */
+footer #footer-branding {
+  text-align: center;
+}
+/* line 18, sass/_footer.firefly.scss */
+footer #footer-branding img {
+  width: 60px;
+  height: 60px;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+/* line 25, sass/_footer.firefly.scss */
+footer #footer-branding p {
+  margin: 5px;
+  font-size: .6em;
+}
+/* line 32, sass/_footer.firefly.scss */
+footer header {
+  color: #ebebe7;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+/* line 38, sass/_footer.firefly.scss */
+footer ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+/* line 44, sass/_footer.firefly.scss */
+footer ul li {
+  font-size: .75em;
+  color: #f26222;
 }
 
 /* line 4, sass/_admin.firefly.scss */
@@ -219,14 +256,87 @@ footer {
   pointer-events: none;
 }
 
-/* line 17, sass/dgl.firefly.scss */
+/* line 4, sass/_home.firefly.scss */
+#home-banner {
+  background-color: #f26222;
+  min-height: 350px;
+  position: relative;
+}
+/* line 11, sass/_home.firefly.scss */
+#home-banner #home-carousel {
+  position: absolute;
+  z-index: 100;
+  top: 50px;
+  left: 50%;
+  margin-left: -400px;
+  width: 800px;
+  border: 10px solid rgba(255, 255, 255, 0.5);
+}
+/* line 21, sass/_home.firefly.scss */
+#home-banner #home-carousel .item {
+  height: 300px;
+}
+/* line 27, sass/_home.firefly.scss */
+#home-banner #divider {
+  position: absolute;
+  z-index: 5;
+  bottom: 0px;
+  left: 0px;
+  height: 25px;
+  width: 100%;
+  background-color: #d44a0d;
+}
+
+/* line 39, sass/_home.firefly.scss */
+#home-results {
+  background-color: #131315;
+  text-align: center;
+  margin: 0px;
+  padding: 30px 0px 10px 0px;
+  color: #bdbdaf;
+}
+/* line 47, sass/_home.firefly.scss */
+#home-results h5 {
+  text-transform: uppercase;
+  font-size: .75em;
+  letter-spacing: 1px;
+  color: #8e8e99;
+}
+/* line 55, sass/_home.firefly.scss */
+#home-results ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* line 63, sass/_home.firefly.scss */
+#home-boxes {
+  text-align: center;
+  padding: 30px 0px 30px 0px;
+}
+
+/* line 18, sass/dgl.firefly.scss */
 html {
   position: relative;
   min-height: 100%;
 }
 
-/* line 23, sass/dgl.firefly.scss */
+/* line 24, sass/dgl.firefly.scss */
 body {
-  background: #131315;
-  margin-bottom: 100px;
+  background: -webkit-gradient(radial, 400px 300px, 0, 400px 300px, 600, color-stop(1.66667%, #747480), color-stop(100%, transparent)), linear-gradient(45deg, #131315, #5c5c65);
+  background: -webkit-radial-gradient(400px 300px, #747480 10px, transparent 600px), -webkit-linear-gradient(45deg, #131315, #5c5c65);
+  background: -moz-radial-gradient(400px 300px, #747480 10px, transparent 600px), -moz-linear-gradient(45deg, #131315, #5c5c65);
+  background: -o-radial-gradient(400px 300px, #747480 10px, transparent 600px), -o-linear-gradient(45deg, #131315, #5c5c65);
+  background: radial-gradient(400px 300px, #747480 10px, transparent 600px), linear-gradient(45deg, #131315, #5c5c65);
+  margin-bottom: 120px;
+}
+
+/* line 32, sass/dgl.firefly.scss */
+main {
+  margin-top: -50px;
+}
+/* line 36, sass/dgl.firefly.scss */
+main #content {
+  background: rgba(19, 19, 21, 0.35);
+  border: 1px solid rgba(19, 19, 21, 0.5);
 }

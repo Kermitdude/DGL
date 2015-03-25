@@ -92,9 +92,16 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 100px;
+  height: 120px;
   background-color: #1f1f22;
   color: #ebebe7;
+}
+/* line 15, sass/_footer.firefly.scss */
+footer #footer-branding img {
+  width: 75px;
+  height: 75px;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
 }
 
 /* line 15, sass/admin.firefly.scss */
@@ -106,7 +113,7 @@ html {
 /* line 21, sass/admin.firefly.scss */
 body {
   background: #131315;
-  margin-bottom: 100px;
+  margin-bottom: 120px;
 }
 
 /* line 27, sass/admin.firefly.scss */

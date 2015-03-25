@@ -15,9 +15,10 @@
 </head>
 
 <body>
+	<div>
 	<header>	
 	
-		<?php include('elements/menu.php'); ?> <!-- Main menu -->
+		<?php include('elements/header.php'); ?> <!-- Header -->
 
 	</header>
 	
@@ -28,11 +29,7 @@
 	</main>
 	<footer class="footer">
 	
-		<div class="container"> <!-- Wrapper -->
-	
-			Footer
-			
-		</div>
+		<?php include('elements/footer.php'); ?> <!-- Footer -->
 		
 	</footer>
 	
@@ -42,6 +39,7 @@
 	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> <!-- Bootstrap -->
 	<script type="text/javascript" src="/../assets/js/dgl.js"></script> <!-- Page.js -->
 	<script type="text/javascript" src="/../assets/js/pace.js"></script> <!-- Pace.js -->
+
 
 	<?php include('elements/modals.php'); ?> <!-- Login modal -->
 

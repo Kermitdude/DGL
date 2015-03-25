@@ -1,0 +1,66 @@
+@import "_variables.firefly";
+
+#home-banner
+{
+	background-color: $orange;
+	min-height: 350px;
+	position: relative;
+
+
+	#home-carousel
+	{
+		position: absolute;
+		z-index: 100;
+		top: 50px;
+		left: 50%;
+		margin-left: -400px;
+		width: 800px;
+		border: 10px solid rgba(255,255,255,.5);
+		
+		.item
+		{
+			height: 300px;
+		}
+	}
+	
+	#divider
+	{
+		position: absolute;
+		z-index: 5;
+		bottom: 0px;
+		left: 0px;
+		height: 25px;
+		width: 100%;
+		background-color: darken($orange, 10);
+	}
+}
+
+#home-results
+{
+	background-color: $charcoal;
+	text-align: center;
+	margin: 0px;
+	padding: 30px 0px 10px 0px;
+	color: darken($eggshell, 20);
+	
+	h5
+	{
+		text-transform: uppercase;
+		font-size: .75em;
+		letter-spacing: 1px;
+		color: lighten($charcoal, 50);
+	}
+	
+	ul
+	{
+		list-style-type: none;
+		margin: 0px;
+		padding: 0px;
+	}
+}
+
+#home-boxes
+{
+	text-align: center;
+	padding: 30px 0px 30px 0px;
+}
