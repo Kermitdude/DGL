@@ -76,8 +76,17 @@
 			color: $complementary;
 		}
 		
+		.row-child 
+		{
+			@include background(
+				radial-gradient(400px 300px, darken($eggshell,10) 10px, transparent 600px),
+				linear-gradient(45deg, rgba($eggshell,.5), darken(rgba($eggshell,.5), 10)));
+		}
+		
 		aside
 		{
+			color: $charcoal;
+			
 			figure
 			{
 				float: left;
@@ -94,18 +103,12 @@
 				
 				dt
 				{
-					color: $complementary;
+					padding: 3px;
 				}
 				
 				dd
 				{
-					width: 100%;
-				}
-				
-				input[type="text"]
-				{
-					background: transparent;
-					border: 0px;
+					padding: 3px;
 					width: 100%;
 				}
 			}
@@ -124,24 +127,24 @@
 	
 	.section-well
 	{
-		//@include box-shadow(black 0 0 5px, rgba(black, 0.2) 0 0 3px 1px inset);
-		//background: rgba(black, 0.2); 
 		margin: 50px 0px 50px 0px; 
 		padding: 40px 20px 40px 20px; 
-		//border: 1px solid rgba(255,255,255,.1);
 	}
 	
-	#user-addnew
+	&.admin-users
 	{
-		width: 400px;
-		margin-right: 50px;
-		text-align: right;
-		
-		input
+		#user-addnew
 		{
-			background: rgba($charcoal, 0.25);
+			width: 400px;
+			margin-right: 50px;
+			text-align: right;
+			
+			input
+			{
+				background: rgba($charcoal, 0.25);
+			}
 		}
-	}
+	}	
 
 	.gridster
 	{

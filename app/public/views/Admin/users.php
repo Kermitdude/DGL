@@ -1,4 +1,6 @@
-<div class="admin">
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+
+<div class="admin admin-users">
 
 	<nav id="sidebar">		
 		<ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="50">
@@ -77,7 +79,7 @@
 	$(document).ready(function()
 	{	
 		var data = <?= $usersTable; ?>;		
-		
+		 
 		// Bind the mouse events
 		bindMouseEvents();
 		
@@ -115,7 +117,10 @@
 				tr.addClass('shown');
 			}
 			
-			$('[data-toggle="tooltip"]').tooltip();
+			$('[data-toggle="tooltip"]').tooltip(); // Enable tooltips on buttons
+		
+			enableEdit(); // Enable in-place editing
+		
 		} );
 
 		var chartData = {
@@ -139,19 +144,35 @@
 		
 	} );
 	
+	function enableEdit()
+	{
+		$('.edit-name').editable({
+		   name: 'name',
+		   url:  editUser,
+		});		
+		$('.edit-email').editable({
+		   name: 'email',
+		   url: editUser,
+		});	
+		$('.edit-password').editable({
+		   name: 'password',
+		   url: editUser,
+		});		
+	}
+	
 	function bindMouseEvents()
 	{
 		// Confirm add user
 		$("#modal-adduser-confirm").click(addUser);
 		
 		// Show delete confirm
-		$(".admin #users-table").on("click",".user-control-delete", function(){
+		$(".admin #users-table").on("click", ".user-control-delete", function(){
 			$('#modal-deleteuser').modal('show');
 			$('#modal-deleteuser-confirm').data('user', $(this).data("user"))
 		});
 		
 		// Confirm delete user
-		$("#modal-deleteuser-confirm").click(deleteUser);		
+		$("#modal-deleteuser-confirm").click(deleteUser);
 	}
 	
 	/* Formatting function for row details - modify as you need */
@@ -164,11 +185,11 @@
 					'</figure>' +
 					'<dl class="dl-horizontal">' +
 						'<dt>Name</dt>' +
-						'<dd><input type="text" placeholder="' + d.name + '" /></dd>' +
+						'<dd><span class="edit-name" data-type="text" data-pk="' + d.id + '" data-title="Enter username">' + d.name + '</span></dd>' +
 						'<dt>E-mail</dt>' +
-						'<dd><input type="text" placeholder="' + d.email + '" /></dd>' +
+						'<dd><span class="edit-email" data-type="text" data-pk="' + d.id + '" data-title="Enter email">' + d.email + '</span></dd>' +
 						'<dt>Password</dt>' +
-						'<dd><input type="text" placeholder="Enter new password" /></dd>' +
+						'<dd><span class="edit-password" data-type="text" data-pk="' + d.id + '" data-title="Enter password">enter new password...</span></dd>' +
 					'</dl>' +
 				'</aside>' +
 				'<div class="controls">' +
@@ -176,10 +197,9 @@
 					'<button data-user="' + d.id + '" class="user-control-delete btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete user"><i class="fa fa-trash fa-fw"></i></button>' +
 					'<button data-user="' + d.id + '" class="user-control-reset btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Send new password"><i class="fa fa-key"></i></button>' +
 					'<button data-user="' + d.id + '" class="user-control-send btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Send message"><i class="fa fa-envelope fa-fw"></i></button>' +
-					'<button data-user="' + d.id + '" class="user-control-save btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Save changes"><i class="fa fa-floppy-o fa-fw"></i></button>' +
 				'</div>';
 	}
-		
+				
 	function addUser()
 	{
 		var name     = $("#adduser-username").val();
@@ -234,6 +254,29 @@
 			},
 			'json');
 	}
+
+	function editUser(params)
+	{
+		var d = new $.Deferred;
+		params.controller =  'UsersController';
+		params.action = 'editUser';
+			
+		$.post("/AppController.php", params,
+			function(data) 
+			{
+				if (data.success)
+				{
+					d.resolve();
+					
+					// Reload page
+					var parameters = { controller: "AdminController", action: "users" };
+					DGL_nav_post("/AppController.php", parameters, "#content");
+				}
+			},
+			'json');
+			
+		return d.promise();
+	}
 </script>
-	
+
 <?php include "/elements/admin_modals.php"; ?>

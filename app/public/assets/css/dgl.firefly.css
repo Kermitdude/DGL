@@ -209,7 +209,19 @@ footer ul li {
   content: "\f148";
   color: #2a9fd6;
 }
-/* line 82, sass/_admin.firefly.scss */
+/* line 80, sass/_admin.firefly.scss */
+.admin table .row-child {
+  background: -webkit-gradient(radial, 400px 300px, 0, 400px 300px, 600, color-stop(1.66667%, #d4d4cb), color-stop(100%, transparent)), linear-gradient(45deg, rgba(235, 235, 231, 0.5), rgba(212, 212, 203, 0.5));
+  background: -webkit-radial-gradient(400px 300px, #d4d4cb 10px, transparent 600px), -webkit-linear-gradient(45deg, rgba(235, 235, 231, 0.5), rgba(212, 212, 203, 0.5));
+  background: -moz-radial-gradient(400px 300px, #d4d4cb 10px, transparent 600px), -moz-linear-gradient(45deg, rgba(235, 235, 231, 0.5), rgba(212, 212, 203, 0.5));
+  background: -o-radial-gradient(400px 300px, #d4d4cb 10px, transparent 600px), -o-linear-gradient(45deg, rgba(235, 235, 231, 0.5), rgba(212, 212, 203, 0.5));
+  background: radial-gradient(400px 300px, #d4d4cb 10px, transparent 600px), linear-gradient(45deg, rgba(235, 235, 231, 0.5), rgba(212, 212, 203, 0.5));
+}
+/* line 87, sass/_admin.firefly.scss */
+.admin table aside {
+  color: #131315;
+}
+/* line 91, sass/_admin.firefly.scss */
 .admin table aside figure {
   float: left;
   margin: 10px 10px 10px 30px;
@@ -217,94 +229,89 @@ footer ul li {
   height: 75px;
   overflow: hidden;
 }
-/* line 91, sass/_admin.firefly.scss */
+/* line 100, sass/_admin.firefly.scss */
 .admin table aside dl {
   float: left;
   font-size: .9em;
 }
-/* line 96, sass/_admin.firefly.scss */
+/* line 105, sass/_admin.firefly.scss */
 .admin table aside dl dt {
-  color: #2a9fd6;
+  padding: 3px;
 }
-/* line 101, sass/_admin.firefly.scss */
+/* line 110, sass/_admin.firefly.scss */
 .admin table aside dl dd {
+  padding: 3px;
   width: 100%;
 }
-/* line 106, sass/_admin.firefly.scss */
-.admin table aside dl input[type="text"] {
-  background: transparent;
-  border: 0px;
-  width: 100%;
-}
-/* line 115, sass/_admin.firefly.scss */
+/* line 118, sass/_admin.firefly.scss */
 .admin table .controls {
   float: right;
 }
-/* line 119, sass/_admin.firefly.scss */
+/* line 122, sass/_admin.firefly.scss */
 .admin table .controls button {
   margin: 5px;
 }
-/* line 126, sass/_admin.firefly.scss */
+/* line 129, sass/_admin.firefly.scss */
 .admin .section-well {
   margin: 50px 0px 50px 0px;
   padding: 40px 20px 40px 20px;
 }
-/* line 135, sass/_admin.firefly.scss */
-.admin #user-addnew {
+/* line 137, sass/_admin.firefly.scss */
+.admin.admin-users #user-addnew {
   width: 400px;
   margin-right: 50px;
   text-align: right;
 }
-/* line 141, sass/_admin.firefly.scss */
-.admin #user-addnew input {
+/* line 143, sass/_admin.firefly.scss */
+.admin.admin-users #user-addnew input {
   background: rgba(19, 19, 21, 0.25);
 }
-/* line 150, sass/_admin.firefly.scss */
+/* line 153, sass/_admin.firefly.scss */
 .admin .gridster ul {
   margin: 50px 0px 0px -10px;
   list-style-type: none;
 }
-/* line 155, sass/_admin.firefly.scss */
+/* line 158, sass/_admin.firefly.scss */
 .admin .gridster ul li {
   -webkit-border-radius: 4px 4px;
   -moz-border-radius: 4px / 4px;
   border-radius: 4px / 4px;
   color: white;
 }
-/* line 162, sass/_admin.firefly.scss */
+/* line 165, sass/_admin.firefly.scss */
 .admin .gridster .preview-holder {
   border: 1px solid white;
   background: #747480 !important;
 }
-/* line 169, sass/_admin.firefly.scss */
+/* line 172, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-users-latest {
   background-color: #2a9fd6;
 }
-/* line 174, sass/_admin.firefly.scss */
+/* line 177, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-analytics {
   background-color: #1e1e1e;
 }
-/* line 179, sass/_admin.firefly.scss */
+/* line 182, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-users-logged {
   background-color: #1e1e1e;
 }
-/* line 184, sass/_admin.firefly.scss */
+/* line 187, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-recent-entries {
   background-color: #2a9fd6;
 }
-/* line 189, sass/_admin.firefly.scss */
+/* line 192, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-matches-monthly {
   background-color: #1e1e1e;
 }
-/* line 194, sass/_admin.firefly.scss */
+/* line 197, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-matches-latest {
   background-color: #1e1e1e;
 }
-/* line 199, sass/_admin.firefly.scss */
+/* line 202, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-errors {
   background-color: #1e1e1e;
 }
-/* line 204, sass/_admin.firefly.scss */
+/* line 207, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-messages {
   background-color: #2a9fd6;
 }

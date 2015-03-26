@@ -42,6 +42,7 @@
 	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></script> <!-- Datatables.js -->
 	<script type="text/javascript" src="/../assets/js/dgl.js"></script> <!-- Page.js -->
 	<script type="text/javascript" src="/../assets/js/pace.js"></script> <!-- Pace.js -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script> <!-- Editable.js -->
 
 
 	<?php include('elements/modals.php'); ?> <!-- Login modal -->

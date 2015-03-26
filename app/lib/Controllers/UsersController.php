@@ -12,6 +12,7 @@ class UsersController
 	public function __construct()
 	{
 		$this->viewPath = $_SERVER['DOCUMENT_ROOT'] . "views/Users/";
+		$this->ajaxData['success'] = false;
 	}
 	
 	public function index()
@@ -72,6 +73,29 @@ class UsersController
 			
 			$this->send();	
 		}
+	}	
+	
+	public function editUser()
+	{		
+		if (isset($_POST['pk']))
+		{
+			if (isset($_POST['value']))
+			{
+				$user = Base\UserQuery::create()->findOneById($_POST['pk']);
+				
+				if (isset($_POST['name']))
+				{
+					if ($_POST['name'] === 'name') $user->setName($_POST['value']);
+					elseif ($_POST['name'] === 'email') $user->setEmail($_POST['value']);
+					elseif ($_POST['name'] === 'password') $user->setPassword($user->hashPassword($_POST['value']));
+				}
+				
+				$success = $user->save();
+				$this->ajaxData['success'] = $success;
+			}
+		}
+				
+		$this->send();	
 	}		
 	
 	protected function send()
