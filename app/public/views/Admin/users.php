@@ -71,14 +71,115 @@
 
 	
 <script type="text/javascript" src="/assets/js/Chart.min.js"></script> <!-- Chart.js -->
+
 <script type="text/javascript">
-$(document).ready(function()
-{	
-	var data = <?= $usersTable; ?>;
+
+	$(document).ready(function()
+	{	
+		var data = <?= $usersTable; ?>;		
+		
+		// Bind the mouse events
+		bindMouseEvents();
+		
+		// Initialize datatable
+		var table = $('.admin #users-table').DataTable({
+			data: data,
+			order: [[1, 'desc']],
+			"columns": [
+				{
+					"className":      'details-control dt-center control',
+					"orderable":      false,
+					"data":           null,
+					"defaultContent": '',
+					"width": "10px",
+				},
+				{ "data": "name" },
+				{ "data": "email" },
+				{ "data": "created_at" },
+			],
+		});
+		
+		// Add event listener for opening and closing details
+		$('.admin #users-table tbody').on('click', 'td.details-control', function () {
+			var tr = $(this).closest('tr');
+			var row = table.row( tr );
+	 
+			if ( row.child.isShown() ) {
+				// This row is already open - close it
+				row.child.hide();
+				tr.removeClass('shown');
+			}
+			else {
+				// Open this row
+				row.child(format(row.data()), 'row-child').show();
+				tr.addClass('shown');
+			}
+			
+			$('[data-toggle="tooltip"]').tooltip();
+		} );
+
+		var chartData = {
+			labels: ["January", "February", "March", "April", "May", "June", "July"],
+			datasets: [
+				{
+					label: "Number of users",
+					fillColor: "rgb(19,19,21,1)",
+					strokeColor: "rgba(242,98,34,.9)",
+					pointColor: "rgba(242,98,34,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(151,187,205,1)",
+					data: [28, 48, 40, 19, 86, 27, 90]
+				}
+			]
+		};
+		
+		var ctx = $("#user-chart").get(0).getContext("2d");
+		var myNewChart = new Chart(ctx).Line(chartData);	
+		
+	} );
 	
-	// Confirm add user
-	$("#modal-adduser-confirm").click(addUser);
+	function bindMouseEvents()
+	{
+		// Confirm add user
+		$("#modal-adduser-confirm").click(addUser);
+		
+		// Show delete confirm
+		$(".admin #users-table").on("click",".user-control-delete", function(){
+			$('#modal-deleteuser').modal('show');
+			$('#modal-deleteuser-confirm').data('user', $(this).data("user"))
+		});
+		
+		// Confirm delete user
+		$("#modal-deleteuser-confirm").click(deleteUser);		
+	}
 	
+	/* Formatting function for row details - modify as you need */
+	function format ( d ) {
+		
+		// `d` is the original data object for the row
+		return 	'<aside>' +
+					'<figure>' +
+						'<i class="fa fa-user fa-5x"></i>' +
+					'</figure>' +
+					'<dl class="dl-horizontal">' +
+						'<dt>Name</dt>' +
+						'<dd><input type="text" placeholder="' + d.name + '" /></dd>' +
+						'<dt>E-mail</dt>' +
+						'<dd><input type="text" placeholder="' + d.email + '" /></dd>' +
+						'<dt>Password</dt>' +
+						'<dd><input type="text" placeholder="Enter new password" /></dd>' +
+					'</dl>' +
+				'</aside>' +
+				'<div class="controls">' +
+					'<button data-user="' + d.id + '" class="user-control-ban btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Ban user"><i class="fa fa-ban"></i></button>' +
+					'<button data-user="' + d.id + '" class="user-control-delete btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete user"><i class="fa fa-trash fa-fw"></i></button>' +
+					'<button data-user="' + d.id + '" class="user-control-reset btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Send new password"><i class="fa fa-key"></i></button>' +
+					'<button data-user="' + d.id + '" class="user-control-send btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Send message"><i class="fa fa-envelope fa-fw"></i></button>' +
+					'<button data-user="' + d.id + '" class="user-control-save btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Save changes"><i class="fa fa-floppy-o fa-fw"></i></button>' +
+				'</div>';
+	}
+		
 	function addUser()
 	{
 		var name     = $("#adduser-username").val();
@@ -98,6 +199,7 @@ $(document).ready(function()
 			{
 				if (data.success)
 				{
+					// Reload page
 					var parameters = { controller: "AdminController", action: "users" };
 					DGL_nav_post("/AppController.php", parameters, "#content");
 				}
@@ -107,88 +209,31 @@ $(document).ready(function()
 		$("#adduser-form").trigger("reset");
 	}
 	
-	// Initialize datatable
-	var table = $('.admin #users-table').DataTable({
-		data: data,
-		order: [[1, 'desc']],
-        "columns": [
-            {
-                "className":      'details-control dt-center control',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": '',
-				"width": "10px",
-            },
-            { "data": "name" },
-            { "data": "email" },
-            { "data": "created_at" },
-        ],
-	});
-	
-    // Add event listener for opening and closing details
-    $('.admin #users-table tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
- 
-        if ( row.child.isShown() ) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            row.child(format(row.data()), 'row-child').show();
-            tr.addClass('shown');
-        }
+	function deleteUser()
+	{
+		var id     = $(this).data("user");
 		
-		$('[data-toggle="tooltip"]').tooltip();
-    } );
-	
-	/* Formatting function for row details - modify as you need */
-	function format ( d ) {
+		$('#modal-deleteuser').modal('hide');
+		$('.modal-backdrop').remove();
 		
-		// `d` is the original data object for the row
-		return 	'<aside>' +
-					'<figure>' +
-						'<i class="fa fa-user fa-5x"></i>' +
-					'</figure>' +
-					'<dl class="dl-horizontal">' +
-						'<dt>Name</dt>' +
-						'<dd><input type="text" value="' + d.name + '" /></dd>' +
-						'<dt>E-mail</dt>' +
-						'<dd><input type="text" value="' + d.email + '" /></dd>' +
-					'</dl>' +
-				'</aside>' +
-				'<div class="controls">' +
-					'<button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Ban user"><i class="fa fa-ban"></i></button>' +
-					'<button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete user"><i class="fa fa-trash fa-fw"></i></button>' +
-					'<button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Send new password"><i class="fa fa-key"></i></button>' +
-					'<button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Send message"><i class="fa fa-envelope fa-fw"></i></button>' +
-					'<button class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Save changes"><i class="fa fa-floppy-o fa-fw"></i></button>' +
-				'</div>';
-				
-	}
-	
-	var chartData = {
-		labels: ["January", "February", "March", "April", "May", "June", "July"],
-		datasets: [
+		var params   = { 
+				controller  : 'UsersController', 
+				action      : 'deleteUser',
+				id          : id,
+			};
+			
+		$.post("/AppController.php", params,
+			function(data) 
 			{
-				label: "Number of users",
-				fillColor: "rgb(19,19,21,1)",
-				strokeColor: "rgba(242,98,34,.9)",
-				pointColor: "rgba(242,98,34,1)",
-				pointStrokeColor: "#fff",
-				pointHighlightFill: "#fff",
-				pointHighlightStroke: "rgba(151,187,205,1)",
-				data: [28, 48, 40, 19, 86, 27, 90]
-			}
-		]
-	};
-	
-	var ctx = $("#user-chart").get(0).getContext("2d");
-	var myNewChart = new Chart(ctx).Line(chartData);	
-	
-} );
+				if (data.success)
+				{
+					// Reload page
+					var parameters = { controller: "AdminController", action: "users" };
+					DGL_nav_post("/AppController.php", parameters, "#content");
+				}
+			},
+			'json');
+	}
 </script>
 	
 <?php include "/elements/admin_modals.php"; ?>

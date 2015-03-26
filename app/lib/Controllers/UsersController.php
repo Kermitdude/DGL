@@ -59,6 +59,19 @@ class UsersController
 				}
 			}
 		}
+	}	
+	
+	public function deleteUser()
+	{		
+		if (isset($_POST['id']))
+		{
+			$user = Base\UserQuery::create()->findOneById($_POST['id']);
+			$user->delete();
+			
+			$this->ajaxData['success'] = $user->isDeleted();
+			
+			$this->send();	
+		}
 	}		
 	
 	protected function send()

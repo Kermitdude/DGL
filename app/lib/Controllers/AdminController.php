@@ -18,12 +18,13 @@ class AdminController
 	public function users()
 	{
 		$userQuery = Base\UserQuery::create()->find();
-		$dateFormat = "Y-m-d H:i:s";
+		$dateFormat = "F j, Y, g:i a";
 		$usersTable;
 		
 		foreach ($userQuery as $user) 
 		{
 			$usersTable[] =  array(
+				"id" => $user->getId(), 
 				"name" => $user->getName(), 
 				"email" => $user->getEmail(), 
 				"created_at" => $user->getCreatedAt()->format($dateFormat));
@@ -35,7 +36,7 @@ class AdminController
 	public function roles()
 	{
 		$roleQuery = Base\RoleQuery::create()->find();
-		$dateFormat = "Y-m-d H:i:s";
+		$dateFormat = "F j, Y, g:i a";
 		$rolesTable;
 		
 		foreach ($roleQuery as $role) 
