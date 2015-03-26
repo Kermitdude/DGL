@@ -3,9 +3,9 @@
 	<nav id="sidebar">		
 		<ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="50">
 			<li><a href="/admin">Dashboard</a></li>
-			<li class="active"><a href="/admin/users">Users</a></li>
+			<li><a href="/admin/users">Users</a></li>
 			<li><a href="/admin/roles">Roles</a></li>
-			<li><a href="/admin/permissions">Permissions</a></li>
+			<li class="active"><a href="/admin/permissions">Permissions</a></li>
 			<li><a href="/admin/stats">Statistics</a></li>
 			<li><a href="/admin/logs">Logs</a></li>
 		</ul>
@@ -13,12 +13,12 @@
 	
 	<main>
 	
-		<h5>Users</h5>
+		<h5>Permissions</h5>
 		
 		<div style="text-align: right;">
 		
 			<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-				 <i class="fa fa-plus-square"></i> Add User
+				 <i class="fa fa-plus-square"></i> Add Permission
 			</button>
 			
 			<div class="collapse" id="collapseExample">
@@ -31,13 +31,12 @@
 		
 		<hr />
 		
-		<table id="users-table" class="table stripe hover">
+		<table id="permissions-table" class="table stripe hover">
 			<thead>
 				<tr>
 					<th></th>
 					<th>Name</th>
-					<th>E-mail</th>
-					<th>Created</th>
+					<th>Description</th>
 				</tr>
 			</thead>
 		</table>
@@ -50,10 +49,10 @@
 <script type="text/javascript">
 $(document).ready(function()
 {	
-	var data = <?= $usersTable; ?>;
+	var data = <?= $permissionsTable; ?>;
 	
 	// Initialize datatable
-	var table = $('.admin #users-table').DataTable({
+	var table = $('.admin #permissions-table').DataTable({
 		data: data,
         "columns": [
             {
@@ -63,8 +62,7 @@ $(document).ready(function()
                 "defaultContent": ''
             },
             { "data": "name" },
-            { "data": "email" },
-            { "data": "created_at" },
+            { "data": "annotation" }
         ],
 	});
 
@@ -77,18 +75,14 @@ $(document).ready(function()
 				'<td>'+d.name+'</td>'+
 			'</tr>'+
 			'<tr>'+
-				'<td>E-mail:</td>'+
-				'<td>'+d.email+'</td>'+
-			'</tr>'+
-			'<tr>'+
-				'<td>Extra info:</td>'+
-				'<td>And any further details here (images etc)...</td>'+
+				'<td>Description:</td>'+
+				'<td>'+d.annotation+'</td>'+
 			'</tr>'+
 		'</table>';
 	}
 	
     // Add event listener for opening and closing details
-    $('.admin #users-table tbody').on('click', 'td.details-control', function () {
+    $('.admin #permissions-table tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
  

@@ -95,6 +95,8 @@ function DGL_nav_mapRoutes()
 	DGL_nav_setRoute('/watch/game/:game', 'WatchController', 'game', '#navbar-watch');
 	DGL_nav_setRoute('/admin', 'AdminController', 'index', '#navbar-admin');
 	DGL_nav_setRoute('/admin/users', 'AdminController', 'users', '#navbar-admin');
+	DGL_nav_setRoute('/admin/roles', 'AdminController', 'roles', '#navbar-admin');
+	DGL_nav_setRoute('/admin/permissions', 'AdminController', 'permissions', '#navbar-admin');
 	DGL_nav_setRoute('*', null, null);
 	page.start();
 }

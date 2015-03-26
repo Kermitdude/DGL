@@ -3,12 +3,14 @@
 $eggshell           : rgb(235,235,231); // DGL White
 $orange             : rgb(242,98,34); // DGL Orange
 $charcoal           : rgb(19,19,21); // DGL Charcoal
+$complementary      : rgb(42,159,214); // complementary colour
 
 // ---------------------------------------------------- SASS Variables
 
 $background-color   : $charcoal;
 $text-color         : $eggshell;
+
 $content-font       : arial, sans-serif;
 $header-font        : arial, sans-serif;
-$footer-height      : 120px;
+$footer-height      : 130px;
 $header-height      : 75px;

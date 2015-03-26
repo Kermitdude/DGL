@@ -1,93 +1,151 @@
 @import "_variables.firefly";
 
-#sidebar
-{
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 200px;
-	
-	ul
-	{
-		width: 100%;
-	}
-	
-	ul.affix 
-	{
-		position: fixed; 
-		top: 50px;
-		width: 200px;
-	}
-	
-	ul.affix-bottom 
-	{
-		position: absolute; 
-	}
-	
-	ul.affix-top 
-	{
-		position: absolute; 
-	}
-}
-
-.gridster
+.admin
 {
 
-	ul
+	position: relative;
+
+	main
 	{
-		margin: 50px 0px 0px -10px;
-		list-style-type: none;
-		
-		li
+		min-height: 400px;
+		margin-left: 200px;
+	
+		h5
 		{
-			@include border-radius(4px, 4px);
-			color: white;
+			margin-bottom: 50px;
+		}
+	}
+
+	#sidebar
+	{
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 175px;
+		
+		ul
+		{
+			width: 100%;
+		}
+		
+		ul.affix 
+		{
+			position: fixed; 
+			top: 50px;
+			width: 175px;
+		}
+		
+		ul.affix-bottom 
+		{
+			position: absolute; 
+		}
+		
+		ul.affix-top 
+		{
+			position: absolute; 
 		}
 	}
 	
-	.preview-holder 
+	table
 	{
-		border: 1px solid white;
-		background: lighten($charcoal,40) !important;
+		background: transparent; 
+		@include box-shadow(rgba(black, 0.4) 0 0 25px, rgba(black, 0.2) 0 0 3px 1px inset);
+		
+		th
+		{
+			background: $complementary !important;
+			color: $charcoal;
+		}
+		
+		td.details-control
+		{
+			text-align: center;
+		}
+		
+		td.details-control:after 
+		{
+			font-family: FontAwesome;
+			padding-left: 0px;
+			content: "\f0ab";
+			font-size: 16px;
+			color: $charcoal;
+		}
+		
+		tr.shown td.details-control:after
+		{
+			font-family: FontAwesome;
+			padding-left: 0px;
+			content: "\f0aa";
+			color: $complementary;
+			font-size: 16px;
+		}
+		
+		.subtable
+		{
+			width: 100%;
+			font-size: .75em;
+		}
 	}
-}
 
-#admin-dashboard-box-users-latest
-{
-	background-color: rgb(42,159,214);
-}
+	.gridster
+	{
 
-#admin-dashboard-box-analytics
-{
-	background-color: rgb(30,30,30);
-}
+		ul
+		{
+			margin: 50px 0px 0px -10px;
+			list-style-type: none;
+			
+			li
+			{
+				@include border-radius(4px, 4px);
+				color: white;
+			}
+		}
+		
+		.preview-holder 
+		{
+			border: 1px solid white;
+			background: lighten($charcoal,40) !important;
+		}
+	}
 
-#admin-dashboard-box-users-logged
-{
-	background-color: rgb(30,30,30);
-}
+	#admin-dashboard-box-users-latest
+	{
+		background-color: rgb(42,159,214);
+	}
 
-#admin-dashboard-box-recent-entries
-{
-	background-color: rgb(42,159,214);
-}
+	#admin-dashboard-box-analytics
+	{
+		background-color: rgb(30,30,30);
+	}
 
-#admin-dashboard-box-matches-monthly
-{
-	background-color: rgb(30,30,30);
-}
+	#admin-dashboard-box-users-logged
+	{
+		background-color: rgb(30,30,30);
+	}
 
-#admin-dashboard-box-matches-latest
-{
-	background-color: rgb(30,30,30);
-}
+	#admin-dashboard-box-recent-entries
+	{
+		background-color: rgb(42,159,214);
+	}
 
-#admin-dashboard-box-errors
-{
-	background-color: rgb(30,30,30);
-}
+	#admin-dashboard-box-matches-monthly
+	{
+		background-color: rgb(30,30,30);
+	}
 
-#admin-dashboard-box-messages
-{
-	background-color: rgb(42,159,214);
+	#admin-dashboard-box-matches-latest
+	{
+		background-color: rgb(30,30,30);
+	}
+
+	#admin-dashboard-box-errors
+	{
+		background-color: rgb(30,30,30);
+	}
+
+	#admin-dashboard-box-messages
+	{
+		background-color: rgb(42,159,214);
+	}
 }

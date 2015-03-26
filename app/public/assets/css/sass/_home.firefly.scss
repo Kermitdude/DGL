@@ -2,7 +2,9 @@
 
 #home-banner
 {
-	background-color: $orange;
+	@include background(
+		radial-gradient(400px 300px, darken($orange,40) 10px, transparent 600px),
+		linear-gradient(45deg, $orange, lighten($orange, 10)));
 	min-height: 350px;
 	position: relative;
 
@@ -15,7 +17,7 @@
 		left: 50%;
 		margin-left: -400px;
 		width: 800px;
-		border: 10px solid rgba(255,255,255,.5);
+		border: 10px solid rgba(255,255,255,.25);
 		
 		.item
 		{
