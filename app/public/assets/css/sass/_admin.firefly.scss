@@ -15,7 +15,7 @@
 			margin-bottom: 50px;
 		}
 	}
-
+	
 	#sidebar
 	{
 		position: absolute;
@@ -57,33 +57,89 @@
 			color: $charcoal;
 		}
 		
-		td.details-control
+		td
 		{
-			text-align: center;
-		}
+			&.details-control:after 
+			{
+				font-family: FontAwesome;
+				font-size: 16px;
+				content: "\f149";
+				color: $charcoal;
+			}
+			
 		
-		td.details-control:after 
-		{
-			font-family: FontAwesome;
-			padding-left: 0px;
-			content: "\f0ab";
-			font-size: 16px;
-			color: $charcoal;
 		}
 		
 		tr.shown td.details-control:after
 		{
-			font-family: FontAwesome;
-			padding-left: 0px;
-			content: "\f0aa";
+			content: "\f148";
 			color: $complementary;
-			font-size: 16px;
 		}
 		
-		.subtable
+		aside
 		{
-			width: 100%;
-			font-size: .75em;
+			figure
+			{
+				float: left;
+				margin: 10px 10px 10px 30px;
+				width: 75px;
+				height: 75px;
+				overflow: hidden;
+			}
+			
+			dl
+			{
+				float: left;
+				font-size: .9em;
+				
+				dt
+				{
+					color: $complementary;
+				}
+				
+				dd
+				{
+					width: 100%;
+				}
+				
+				input[type="text"]
+				{
+					background: transparent;
+					border: 0px;
+					width: 100%;
+				}
+			}
+		}
+		
+		.controls
+		{
+			float: right;
+			
+			button
+			{
+				margin: 5px;
+			}
+		}
+	}
+	
+	.section-well
+	{
+		//@include box-shadow(black 0 0 5px, rgba(black, 0.2) 0 0 3px 1px inset);
+		//background: rgba(black, 0.2); 
+		margin: 50px 0px 50px 0px; 
+		padding: 40px 20px 40px 20px; 
+		//border: 1px solid rgba(255,255,255,.1);
+	}
+	
+	#user-addnew
+	{
+		width: 400px;
+		margin-right: 50px;
+		text-align: right;
+		
+		input
+		{
+			background: rgba($charcoal, 0.25);
 		}
 	}
 

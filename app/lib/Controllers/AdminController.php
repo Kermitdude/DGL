@@ -17,7 +17,7 @@ class AdminController
 	
 	public function users()
 	{
-		$userQuery = Base\UserQuery::create()->orderByCreatedAt();
+		$userQuery = Base\UserQuery::create()->find();
 		$dateFormat = "Y-m-d H:i:s";
 		$usersTable;
 		
@@ -34,7 +34,7 @@ class AdminController
 	
 	public function roles()
 	{
-		$roleQuery = Base\RoleQuery::create()->orderByCreatedAt();
+		$roleQuery = Base\RoleQuery::create()->find();
 		$dateFormat = "Y-m-d H:i:s";
 		$rolesTable;
 		
@@ -51,7 +51,7 @@ class AdminController
 	
 	public function permissions()
 	{
-		$permissionQuery = Base\PermissionQuery::create()->orderByName();
+		$permissionQuery = Base\PermissionQuery::create()->find();
 		$permissionsTable;
 		
 		foreach ($permissionQuery as $permission) 

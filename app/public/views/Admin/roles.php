@@ -8,6 +8,7 @@
 			<li><a href="/admin/permissions">Permissions</a></li>
 			<li><a href="/admin/stats">Statistics</a></li>
 			<li><a href="/admin/logs">Logs</a></li>
+			<li><a href="/admin/settings">Settings</a></li>
 		</ul>
 	</nav>
 	

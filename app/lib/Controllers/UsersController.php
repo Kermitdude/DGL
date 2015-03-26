@@ -5,6 +5,7 @@ class UsersController
 {
 	protected $title = "Profile";
 	protected $viewPath;
+	protected $ajaxData;
 	
 	public $user;
 	
@@ -37,5 +38,32 @@ class UsersController
 		include $this->viewPath . 'profile.php';
 	}
 	
+	public function addUser()
+	{		
+		if (isset($_POST['name']))
+		{
+			if (isset($_POST['email']))
+			{
+				if (isset($_POST['password']))
+				{
+					
+					$user = new User();
+					$user->setName($_POST['name']);
+					$user->setEmail($_POST['email']);
+					$user->setPassword($user->hashPassword($_POST['password']));
+					
+					$success = $user->save();
+					$this->ajaxData['success'] = $success;
+					
+					$this->send();	
+				}
+			}
+		}
+	}		
+	
+	protected function send()
+	{
+		echo json_encode($this->ajaxData);		
+	}
 }
 ?>

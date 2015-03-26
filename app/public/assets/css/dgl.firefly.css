@@ -197,77 +197,114 @@ footer ul li {
   background: #2a9fd6 !important;
   color: #131315;
 }
-/* line 61, sass/_admin.firefly.scss */
-.admin table td.details-control {
-  text-align: center;
-}
-/* line 66, sass/_admin.firefly.scss */
+/* line 63, sass/_admin.firefly.scss */
 .admin table td.details-control:after {
   font-family: FontAwesome;
-  padding-left: 0px;
-  content: "\f0ab";
   font-size: 16px;
+  content: "\f149";
   color: #131315;
 }
-/* line 75, sass/_admin.firefly.scss */
+/* line 74, sass/_admin.firefly.scss */
 .admin table tr.shown td.details-control:after {
-  font-family: FontAwesome;
-  padding-left: 0px;
-  content: "\f0aa";
+  content: "\f148";
   color: #2a9fd6;
-  font-size: 16px;
 }
-/* line 84, sass/_admin.firefly.scss */
-.admin table .subtable {
+/* line 82, sass/_admin.firefly.scss */
+.admin table aside figure {
+  float: left;
+  margin: 10px 10px 10px 30px;
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+}
+/* line 91, sass/_admin.firefly.scss */
+.admin table aside dl {
+  float: left;
+  font-size: .9em;
+}
+/* line 96, sass/_admin.firefly.scss */
+.admin table aside dl dt {
+  color: #2a9fd6;
+}
+/* line 101, sass/_admin.firefly.scss */
+.admin table aside dl dd {
   width: 100%;
-  font-size: .75em;
 }
-/* line 94, sass/_admin.firefly.scss */
+/* line 106, sass/_admin.firefly.scss */
+.admin table aside dl input[type="text"] {
+  background: transparent;
+  border: 0px;
+  width: 100%;
+}
+/* line 115, sass/_admin.firefly.scss */
+.admin table .controls {
+  float: right;
+}
+/* line 119, sass/_admin.firefly.scss */
+.admin table .controls button {
+  margin: 5px;
+}
+/* line 126, sass/_admin.firefly.scss */
+.admin .section-well {
+  margin: 50px 0px 50px 0px;
+  padding: 40px 20px 40px 20px;
+}
+/* line 135, sass/_admin.firefly.scss */
+.admin #user-addnew {
+  width: 400px;
+  margin-right: 50px;
+  text-align: right;
+}
+/* line 141, sass/_admin.firefly.scss */
+.admin #user-addnew input {
+  background: rgba(19, 19, 21, 0.25);
+}
+/* line 150, sass/_admin.firefly.scss */
 .admin .gridster ul {
   margin: 50px 0px 0px -10px;
   list-style-type: none;
 }
-/* line 99, sass/_admin.firefly.scss */
+/* line 155, sass/_admin.firefly.scss */
 .admin .gridster ul li {
   -webkit-border-radius: 4px 4px;
   -moz-border-radius: 4px / 4px;
   border-radius: 4px / 4px;
   color: white;
 }
-/* line 106, sass/_admin.firefly.scss */
+/* line 162, sass/_admin.firefly.scss */
 .admin .gridster .preview-holder {
   border: 1px solid white;
   background: #747480 !important;
 }
-/* line 113, sass/_admin.firefly.scss */
+/* line 169, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-users-latest {
   background-color: #2a9fd6;
 }
-/* line 118, sass/_admin.firefly.scss */
+/* line 174, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-analytics {
   background-color: #1e1e1e;
 }
-/* line 123, sass/_admin.firefly.scss */
+/* line 179, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-users-logged {
   background-color: #1e1e1e;
 }
-/* line 128, sass/_admin.firefly.scss */
+/* line 184, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-recent-entries {
   background-color: #2a9fd6;
 }
-/* line 133, sass/_admin.firefly.scss */
+/* line 189, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-matches-monthly {
   background-color: #1e1e1e;
 }
-/* line 138, sass/_admin.firefly.scss */
+/* line 194, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-matches-latest {
   background-color: #1e1e1e;
 }
-/* line 143, sass/_admin.firefly.scss */
+/* line 199, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-errors {
   background-color: #1e1e1e;
 }
-/* line 148, sass/_admin.firefly.scss */
+/* line 204, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-messages {
   background-color: #2a9fd6;
 }
