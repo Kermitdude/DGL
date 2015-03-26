@@ -128,10 +128,10 @@
 			datasets: [
 				{
 					label: "Number of users",
-					fillColor: "rgb(19,19,21,1)",
+					fillColor: "rgba(19,19,21,.5)",
 					strokeColor: "rgba(242,98,34,.9)",
 					pointColor: "rgba(242,98,34,1)",
-					pointStrokeColor: "#fff",
+					pointStrokeColor: "rgba(0,0,0,.5)",
 					pointHighlightFill: "#fff",
 					pointHighlightStroke: "rgba(151,187,205,1)",
 					data: [28, 48, 40, 19, 86, 27, 90]
@@ -179,7 +179,7 @@
 	function format ( d ) {
 		
 		// `d` is the original data object for the row
-		return 	'<aside>' +
+		return 	'<aside id="user-details-' + d.id + '">' +
 					'<figure>' +
 						'<i class="fa fa-user fa-5x"></i>' +
 					'</figure>' +
@@ -187,7 +187,7 @@
 						'<dt>Name</dt>' +
 						'<dd><span class="edit-name" data-type="text" data-pk="' + d.id + '" data-title="Enter username">' + d.name + '</span></dd>' +
 						'<dt>E-mail</dt>' +
-						'<dd><span class="edit-email" data-type="text" data-pk="' + d.id + '" data-title="Enter email">' + d.email + '</span></dd>' +
+						'<dd><span class="edit-email" data-type="email" data-pk="' + d.id + '" data-title="Enter email">' + d.email + '</span></dd>' +
 						'<dt>Password</dt>' +
 						'<dd><span class="edit-password" data-type="text" data-pk="' + d.id + '" data-title="Enter password">enter new password...</span></dd>' +
 					'</dl>' +
@@ -242,7 +242,7 @@
 				id          : id,
 			};
 			
-		$.post("/AppController.php", params,
+ 		$.post("/AppController.php", params,
 			function(data) 
 			{
 				if (data.success)

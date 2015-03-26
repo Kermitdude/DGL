@@ -79,8 +79,8 @@
 		.row-child 
 		{
 			@include background(
-				radial-gradient(400px 300px, darken($eggshell,10) 10px, transparent 600px),
-				linear-gradient(45deg, rgba($eggshell,.5), darken(rgba($eggshell,.5), 10)));
+				radial-gradient(400px 300px, darken(rgba($eggshell,.5), 20) 10px, transparent 200px),
+				linear-gradient(45deg, rgba($eggshell,.5), darken(rgba($eggshell,.5), 20)));
 		}
 		
 		aside
