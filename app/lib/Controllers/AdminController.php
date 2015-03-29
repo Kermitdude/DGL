@@ -20,32 +20,57 @@ class AdminController
 		$userQuery = Base\UserQuery::create()->find();
 		$dateFormat = "F j, Y, g:i a";
 		$usersTable;
+		$rolesList;
 		
+		// Get roles
+		$roleQuery = Base\RoleQuery::create()->find();
+		$i = 1;
+				
+		foreach ($roleQuery as $role) 
+		{
+			$rolesList[] = array( 'value' => $role->getName(), 'text' => $role->getName());
+			$i++;
+		}
+		
+		// Get roles for each user
 		foreach ($userQuery as $user) 
 		{
+			$roles = $user->getRoles();
+			$userRoles = [];
+			foreach ($roles as $role)
+			{
+				$userRoles[] = $role->getName();
+			}
+			
 			$usersTable[] =  array(
 				"id" => $user->getId(), 
 				"name" => $user->getName(), 
 				"email" => $user->getEmail(), 
-				"created_at" => $user->getCreatedAt()->format($dateFormat));
+				"created_at" => $user->getCreatedAt()->format($dateFormat),
+				"roles" => $userRoles
+				);
 		}
+		
+		$rolesList = json_encode($rolesList);
 		$usersTable = json_encode($usersTable);
+		
 		include $this->viewPath . 'users.php';
 	}
 	
 	public function roles()
 	{
 		$roleQuery = Base\RoleQuery::create()->find();
-		$dateFormat = "F j, Y, g:i a";
 		$rolesTable;
 		
 		foreach ($roleQuery as $role) 
 		{
 			$rolesTable[] =  array(
+				"id" => $role->getId(), 
 				"name" => $role->getName(), 
-				"annotation" => $role->getAnnotation(), 
-				"created_at" => $role->getCreatedAt()->format($dateFormat));
+				"annotation" => $role->getAnnotation(),
+				"users" => $role->countUsers());
 		}
+		
 		$rolesTable = json_encode($rolesTable);
 		include $this->viewPath . 'roles.php';
 	}

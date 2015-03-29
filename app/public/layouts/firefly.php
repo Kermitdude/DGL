@@ -43,6 +43,7 @@
 	<script type="text/javascript" src="/../assets/js/dgl.js"></script> <!-- Page.js -->
 	<script type="text/javascript" src="/../assets/js/pace.js"></script> <!-- Pace.js -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script> <!-- Editable.js -->
+	<!-- <script type="text/javascript" src="/../assets/js/noty/packaged/jquery.noty.packaged.min.js"></script> Noty.js -->
 
 
 	<?php include('elements/modals.php'); ?> <!-- Login modal -->

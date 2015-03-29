@@ -57,27 +57,21 @@
 			color: $charcoal;
 		}
 		
-		td
+		tr
 		{
-			&.details-control:after 
-			{
-				font-family: FontAwesome;
-				font-size: 16px;
-				content: "\f149";
-				color: $charcoal;
-			}
+			cursor: pointer;
 			
-		
-		}
-		
-		tr.shown td.details-control:after
-		{
-			content: "\f148";
-			color: $complementary;
+			&.shown 
+			{
+				background-color: lighten($charcoal, 30) !important;
+			}
 		}
 		
 		.row-child 
 		{
+			cursor: default !important;
+			@include box-shadow(black 0 0px 2px inset);
+			
 			@include background(
 				radial-gradient(400px 300px, darken(rgba($eggshell,.5), 20) 10px, transparent 200px),
 				linear-gradient(45deg, rgba($eggshell,.5), darken(rgba($eggshell,.5), 20)));

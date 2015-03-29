@@ -197,31 +197,31 @@ footer ul li {
   background: #2a9fd6 !important;
   color: #131315;
 }
-/* line 63, sass/_admin.firefly.scss */
-.admin table td.details-control:after {
-  font-family: FontAwesome;
-  font-size: 16px;
-  content: "\f149";
-  color: #131315;
+/* line 61, sass/_admin.firefly.scss */
+.admin table tr {
+  cursor: pointer;
 }
-/* line 74, sass/_admin.firefly.scss */
-.admin table tr.shown td.details-control:after {
-  content: "\f148";
-  color: #2a9fd6;
+/* line 65, sass/_admin.firefly.scss */
+.admin table tr.shown {
+  background-color: #5c5c65 !important;
 }
-/* line 80, sass/_admin.firefly.scss */
+/* line 71, sass/_admin.firefly.scss */
 .admin table .row-child {
+  cursor: default !important;
+  -webkit-box-shadow: black 0 0px 2px inset;
+  -moz-box-shadow: black 0 0px 2px inset;
+  box-shadow: black 0 0px 2px inset;
   background: -webkit-gradient(radial, 400px 300px, 0, 400px 300px, 200, color-stop(5%, rgba(189, 189, 175, 0.5)), color-stop(100%, transparent)), linear-gradient(45deg, rgba(235, 235, 231, 0.5), rgba(189, 189, 175, 0.5));
   background: -webkit-radial-gradient(400px 300px, rgba(189, 189, 175, 0.5) 10px, transparent 200px), -webkit-linear-gradient(45deg, rgba(235, 235, 231, 0.5), rgba(189, 189, 175, 0.5));
   background: -moz-radial-gradient(400px 300px, rgba(189, 189, 175, 0.5) 10px, transparent 200px), -moz-linear-gradient(45deg, rgba(235, 235, 231, 0.5), rgba(189, 189, 175, 0.5));
   background: -o-radial-gradient(400px 300px, rgba(189, 189, 175, 0.5) 10px, transparent 200px), -o-linear-gradient(45deg, rgba(235, 235, 231, 0.5), rgba(189, 189, 175, 0.5));
   background: radial-gradient(400px 300px, rgba(189, 189, 175, 0.5) 10px, transparent 200px), linear-gradient(45deg, rgba(235, 235, 231, 0.5), rgba(189, 189, 175, 0.5));
 }
-/* line 87, sass/_admin.firefly.scss */
+/* line 81, sass/_admin.firefly.scss */
 .admin table aside {
   color: #131315;
 }
-/* line 91, sass/_admin.firefly.scss */
+/* line 85, sass/_admin.firefly.scss */
 .admin table aside figure {
   float: left;
   margin: 10px 10px 10px 30px;
@@ -229,89 +229,89 @@ footer ul li {
   height: 75px;
   overflow: hidden;
 }
-/* line 100, sass/_admin.firefly.scss */
+/* line 94, sass/_admin.firefly.scss */
 .admin table aside dl {
   float: left;
   font-size: .9em;
 }
-/* line 105, sass/_admin.firefly.scss */
+/* line 99, sass/_admin.firefly.scss */
 .admin table aside dl dt {
   padding: 3px;
 }
-/* line 110, sass/_admin.firefly.scss */
+/* line 104, sass/_admin.firefly.scss */
 .admin table aside dl dd {
   padding: 3px;
   width: 100%;
 }
-/* line 118, sass/_admin.firefly.scss */
+/* line 112, sass/_admin.firefly.scss */
 .admin table .controls {
   float: right;
 }
-/* line 122, sass/_admin.firefly.scss */
+/* line 116, sass/_admin.firefly.scss */
 .admin table .controls button {
   margin: 5px;
 }
-/* line 129, sass/_admin.firefly.scss */
+/* line 123, sass/_admin.firefly.scss */
 .admin .section-well {
   margin: 50px 0px 50px 0px;
   padding: 40px 20px 40px 20px;
 }
-/* line 137, sass/_admin.firefly.scss */
+/* line 131, sass/_admin.firefly.scss */
 .admin.admin-users #user-addnew {
   width: 400px;
   margin-right: 50px;
   text-align: right;
 }
-/* line 143, sass/_admin.firefly.scss */
+/* line 137, sass/_admin.firefly.scss */
 .admin.admin-users #user-addnew input {
   background: rgba(19, 19, 21, 0.25);
 }
-/* line 153, sass/_admin.firefly.scss */
+/* line 147, sass/_admin.firefly.scss */
 .admin .gridster ul {
   margin: 50px 0px 0px -10px;
   list-style-type: none;
 }
-/* line 158, sass/_admin.firefly.scss */
+/* line 152, sass/_admin.firefly.scss */
 .admin .gridster ul li {
   -webkit-border-radius: 4px 4px;
   -moz-border-radius: 4px / 4px;
   border-radius: 4px / 4px;
   color: white;
 }
-/* line 165, sass/_admin.firefly.scss */
+/* line 159, sass/_admin.firefly.scss */
 .admin .gridster .preview-holder {
   border: 1px solid white;
   background: #747480 !important;
 }
-/* line 172, sass/_admin.firefly.scss */
+/* line 166, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-users-latest {
   background-color: #2a9fd6;
 }
-/* line 177, sass/_admin.firefly.scss */
+/* line 171, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-analytics {
   background-color: #1e1e1e;
 }
-/* line 182, sass/_admin.firefly.scss */
+/* line 176, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-users-logged {
   background-color: #1e1e1e;
 }
-/* line 187, sass/_admin.firefly.scss */
+/* line 181, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-recent-entries {
   background-color: #2a9fd6;
 }
-/* line 192, sass/_admin.firefly.scss */
+/* line 186, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-matches-monthly {
   background-color: #1e1e1e;
 }
-/* line 197, sass/_admin.firefly.scss */
+/* line 191, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-matches-latest {
   background-color: #1e1e1e;
 }
-/* line 202, sass/_admin.firefly.scss */
+/* line 196, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-errors {
   background-color: #1e1e1e;
 }
-/* line 207, sass/_admin.firefly.scss */
+/* line 201, sass/_admin.firefly.scss */
 .admin #admin-dashboard-box-messages {
   background-color: #2a9fd6;
 }
@@ -417,13 +417,21 @@ footer ul li {
   padding: 30px 0px 30px 0px;
 }
 
-/* line 18, sass/dgl.firefly.scss */
+@font-face {
+  font-family: 'HandelGotD-Ligh';
+  src: url("../fonts/HandelGotD-Ligh.eot");
+  /* IE 5-8 */
+  src: local("☺"), url("../fonts/HandelGotD-Ligh.woff") format("woff"), url("../fonts/HandelGotD-Ligh.ttf") format("truetype"), url("../fonts/HandelGotD-Ligh.svg#font") format("svg");
+  /* iOS */
+}
+
+/* line 27, sass/dgl.firefly.scss */
 html {
   position: relative;
   min-height: 100%;
 }
 
-/* line 24, sass/dgl.firefly.scss */
+/* line 33, sass/dgl.firefly.scss */
 body {
   background: -webkit-gradient(radial, 400px 300px, 0, 400px 300px, 600, color-stop(1.66667%, #747480), color-stop(100%, transparent)), linear-gradient(45deg, #131315, #5c5c65);
   background: -webkit-radial-gradient(400px 300px, #747480 10px, transparent 600px), -webkit-linear-gradient(45deg, #131315, #5c5c65);
@@ -431,9 +439,15 @@ body {
   background: -o-radial-gradient(400px 300px, #747480 10px, transparent 600px), -o-linear-gradient(45deg, #131315, #5c5c65);
   background: radial-gradient(400px 300px, #747480 10px, transparent 600px), linear-gradient(45deg, #131315, #5c5c65);
   margin-bottom: 130px;
+  font-family: 'HandelGotD-Ligh';
 }
 
-/* line 35, sass/dgl.firefly.scss */
+/* line 42, sass/dgl.firefly.scss */
+h1, h2, h3, h4, h5 {
+  font-family: 'HandelGotD-Ligh';
+}
+
+/* line 50, sass/dgl.firefly.scss */
 main #content {
   padding: 15px;
   background: rgba(19, 19, 21, 0.35);

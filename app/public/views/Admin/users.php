@@ -58,7 +58,6 @@
 			<table id="users-table" class="table stripe hover">
 				<thead>
 					<tr>
-						<th> </th>
 						<th>Name</th>
 						<th>E-mail</th>
 						<th>Created</th>
@@ -78,50 +77,20 @@
 
 	$(document).ready(function()
 	{	
-		var data = <?= $usersTable; ?>;		
+		var users = <?= $usersTable; ?>;		
 		 
 		// Bind the mouse events
 		bindMouseEvents();
 		
 		// Initialize datatable
 		var table = $('.admin #users-table').DataTable({
-			data: data,
-			order: [[1, 'desc']],
+			data: users,
 			"columns": [
-				{
-					"className":      'details-control dt-center control',
-					"orderable":      false,
-					"data":           null,
-					"defaultContent": '',
-					"width": "10px",
-				},
 				{ "data": "name" },
 				{ "data": "email" },
 				{ "data": "created_at" },
-			],
+			]
 		});
-		
-		// Add event listener for opening and closing details
-		$('.admin #users-table tbody').on('click', 'td.details-control', function () {
-			var tr = $(this).closest('tr');
-			var row = table.row( tr );
-	 
-			if ( row.child.isShown() ) {
-				// This row is already open - close it
-				row.child.hide();
-				tr.removeClass('shown');
-			}
-			else {
-				// Open this row
-				row.child(format(row.data()), 'row-child').show();
-				tr.addClass('shown');
-			}
-			
-			$('[data-toggle="tooltip"]').tooltip(); // Enable tooltips on buttons
-		
-			enableEdit(); // Enable in-place editing
-		
-		} );
 
 		var chartData = {
 			labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -140,12 +109,35 @@
 		};
 		
 		var ctx = $("#user-chart").get(0).getContext("2d");
-		var myNewChart = new Chart(ctx).Line(chartData);	
+		var myNewChart = new Chart(ctx).Line(chartData);
+		
+		// Add event listener for opening and closing details
+		$('.admin #users-table tbody').on('click', 'tr:not(".row-child")', function () {
+			var row = table.row( this );
+	 
+			if ( row.child.isShown() ) {
+				// This row is already open - close it
+				row.child.hide();
+				$(this).removeClass('shown');
+			}
+			else {
+				// Open this row
+				row.child(format(row.data()), 'row-child').show();
+				$(this).addClass('shown');
+			}
+			
+			$('[data-toggle="tooltip"]').tooltip(); // Enable tooltips on buttons
+		
+			enableEdit(); // Enable in-place editing
+		
+		} );
 		
 	} );
 	
 	function enableEdit()
-	{
+	{	
+		var roles = <?= $rolesList; ?>;	
+		
 		$('.edit-name').editable({
 		   name: 'name',
 		   url:  editUser,
@@ -158,6 +150,11 @@
 		   name: 'password',
 		   url: editUser,
 		});		
+		$('.edit-roles').editable({
+			name: 'roles', 
+			source: roles,
+			url: editUser
+		});
 	}
 	
 	function bindMouseEvents()
@@ -165,20 +162,24 @@
 		// Confirm add user
 		$("#modal-adduser-confirm").click(addUser);
 		
-		// Show delete confirm
+		// Delete confirm
 		$(".admin #users-table").on("click", ".user-control-delete", function(){
 			$('#modal-deleteuser').modal('show');
-			$('#modal-deleteuser-confirm').data('user', $(this).data("user"))
+			$('#modal-deleteuser-confirm').data('user', $(this).data("user"));
 		});
-		
-		// Confirm delete user
 		$("#modal-deleteuser-confirm").click(deleteUser);
+		
+		// Reset password confirm
+		$(".admin #users-table").on("click", ".user-control-reset", function(){
+			$('#modal-resetpass').modal('show');
+			$('#modal-resetpass-confirm').data('user', $(this).data("user"));
+		});
+		$("#modal-resetpass-confirm").click(sendPassword);
+		
 	}
 	
-	/* Formatting function for row details - modify as you need */
 	function format ( d ) {
-		
-		// `d` is the original data object for the row
+				
 		return 	'<aside id="user-details-' + d.id + '">' +
 					'<figure>' +
 						'<i class="fa fa-user fa-5x"></i>' +
@@ -190,6 +191,8 @@
 						'<dd><span class="edit-email" data-type="email" data-pk="' + d.id + '" data-title="Enter email">' + d.email + '</span></dd>' +
 						'<dt>Password</dt>' +
 						'<dd><span class="edit-password" data-type="text" data-pk="' + d.id + '" data-title="Enter password">enter new password...</span></dd>' +
+						'<dt>Roles</dt>' +
+						'<dd><span class="edit-roles" data-type="checklist" data-value="' + d.roles.toString() + '" data-pk="' + d.id + '" data-title="Select roles">Select roles</span></dd>' +
 					'</dl>' +
 				'</aside>' +
 				'<div class="controls">' +
@@ -201,58 +204,30 @@
 	}
 				
 	function addUser()
-	{
-		var name     = $("#adduser-username").val();
-		var email    = $("#adduser-email").val();
-		var password = $("#adduser-password").val();
-		
+	{		
 		var params   = { 
-				controller  : 'UsersController', 
-				action      : 'addUser',
-				name        : name,
-				email       : email,
-				password    : password,
+				name        : $("#adduser-username").val(),
+				email       : $("#adduser-email").val(),
+				password    : $("#adduser-password").val(),
 			};
-			
-		$.post("/AppController.php", params,
-			function(data) 
-			{
-				if (data.success)
-				{
-					// Reload page
-					var parameters = { controller: "AdminController", action: "users" };
-					DGL_nav_post("/AppController.php", parameters, "#content");
-				}
-			},
-			'json');
+		
+		DGL_nav_ajaxRequest('UsersController', 'addUser', params)
+			.done(function(d) {
+				if (d.success) DGL_nav_reload();
+			});	
 			
 		$("#adduser-form").trigger("reset");
 	}
 	
 	function deleteUser()
 	{
-		var id     = $(this).data("user");
+		var id = $(this).data("user");
 		
 		$('#modal-deleteuser').modal('hide');
 		$('.modal-backdrop').remove();
 		
-		var params   = { 
-				controller  : 'UsersController', 
-				action      : 'deleteUser',
-				id          : id,
-			};
-			
- 		$.post("/AppController.php", params,
-			function(data) 
-			{
-				if (data.success)
-				{
-					// Reload page
-					var parameters = { controller: "AdminController", action: "users" };
-					DGL_nav_post("/AppController.php", parameters, "#content");
-				}
-			},
-			'json');
+		DGL_nav_ajaxRequest('UsersController', 'deleteUser', { id : id })
+			.done(DGL_nav_reload);	
 	}
 
 	function editUser(params)
@@ -267,15 +242,26 @@
 				if (data.success)
 				{
 					d.resolve();
-					
-					// Reload page
-					var parameters = { controller: "AdminController", action: "users" };
-					DGL_nav_post("/AppController.php", parameters, "#content");
+					DGL_nav_reload(); // Reload page
 				}
 			},
 			'json');
 			
 		return d.promise();
+	}
+	
+	function sendPassword()
+	{
+		var id = $(this).data('user');
+		
+		if (id)
+		{
+		
+			DGL_nav_ajaxRequest('EmailController', 'sendPassword', { id : id })
+				.done(function(d) { 
+					//if (d.success) noty({ text: 'E-mail successfully sent to ' + d.name });
+				});		
+		}
 	}
 </script>
 

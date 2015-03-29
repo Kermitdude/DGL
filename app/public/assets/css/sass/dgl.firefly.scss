@@ -14,6 +14,15 @@
 @import "_pace.firefly";
 @import "_home.firefly";
 
+@font-face {
+  font-family: 'HandelGotD-Ligh';
+  src: url('../fonts/HandelGotD-Ligh.eot'); /* IE 5-8 */ 
+  src: local('☺'),             /* sneakily trick IE */
+        url('../fonts/HandelGotD-Ligh.woff') format('woff'),    /* FF 3.6, Chrome 5, IE9 */
+        url('../fonts/HandelGotD-Ligh.ttf') format('truetype'), /* Opera, Safari */
+        url('../fonts/HandelGotD-Ligh.svg#font') format('svg'); /* iOS */
+}
+
 html 
 {
   position: relative;
@@ -26,6 +35,12 @@ body
 		radial-gradient(400px 300px, lighten($charcoal,40) 10px, transparent 600px),
 		linear-gradient(45deg, $charcoal, lighten($charcoal, 30)));
 	margin-bottom: $footer-height;
+	font-family: 'HandelGotD-Ligh';
+}
+
+h1, h2, h3, h4, h5 
+{ 
+	font-family: 'HandelGotD-Ligh';
 }
 
 main

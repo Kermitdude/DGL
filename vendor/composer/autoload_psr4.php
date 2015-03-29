@@ -7,6 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
-    'Klein\\' => array($vendorDir . '/klein/klein/src/Klein'),
     'DigitalGaming\\' => array($baseDir . '/app/lib', $baseDir . '/app/lib/Controllers'),
 );

@@ -35,10 +35,9 @@
 		<table id="roles-table" class="table stripe hover">
 			<thead>
 				<tr>
-					<th></th>
 					<th>Name</th>
 					<th>Description</th>
-					<th>Created</th>
+					<th>Users</th>
 				</tr>
 			</thead>
 		</table>
@@ -49,57 +48,115 @@
 
 
 <script type="text/javascript">
-$(document).ready(function()
-{	
-	var data = <?= $rolesTable; ?>;
-	
-	// Initialize datatable
-	var table = $('.admin #roles-table').DataTable({
-		data: data,
-        "columns": [
-            {
-                "className":      'details-control',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ''
-            },
-            { "data": "name" },
-            { "data": "annotation" },
-            { "data": "created_at" },
-        ],
-	});
+	$(document).ready(function()
+	{	
+		var data = <?= $rolesTable; ?>;
+		
+		// Bind the mouse events
+		bindMouseEvents();
+		
+		// Initialize datatable
+		var table = $('.admin #roles-table').DataTable({
+			data: data,
+			"columns": [
+				{ "data": "name" },
+				{ "data": "annotation" },
+				{ "data": "users" },
+			],
+		});
+		
+		// Add event listener for opening and closing details
+		$('.admin #roles-table tbody').on('click', 'tr:not(".row-child")', function () {
+			var tr = $(this).closest('tr');
+			var row = table.row( tr );
+	 
+			if ( row.child.isShown() ) {
+				// This row is already open - close it
+				row.child.hide();
+				tr.removeClass('shown');
+			}
+			else {
+				// Open this row
+				row.child( format(row.data()) , 'row-child').show();
+				tr.addClass('shown');
+			}
+				
+			$('[data-toggle="tooltip"]').tooltip(); // Enable tooltips on buttons
+		
+			enableEdit(); // Enable in-place editing
+		} );
+		
+	} );
 
-	/* Formatting function for row details - modify as you need */
-	function format ( d ) {
-		// `d` is the original data object for the row
-		return '<table class="subtable table-condensed">'+
-			'<tr>'+
-				'<td>Full name:</td>'+
-				'<td>'+d.name+'</td>'+
-			'</tr>'+
-			'<tr>'+
-				'<td>Description:</td>'+
-				'<td>'+d.annotation+'</td>'+
-			'</tr>'+
-		'</table>';
+	function bindMouseEvents()
+	{
+		
+		// Delete confirm
+		$(".admin #roles-table").on("click", ".role-control-delete", function(){
+			$('#modal-deleterole').modal('show');
+			$('#modal-deleterole-confirm').data('role', $(this).data("role"));
+		});
+		$("#modal-deleterole-confirm").click(deleteRole);
+		
 	}
 	
-    // Add event listener for opening and closing details
-    $('.admin #roles-table tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
- 
-        if ( row.child.isShown() ) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            row.child( format(row.data()) ).show();
-            tr.addClass('shown');
-        }
-    } );
+	function enableEdit()
+	{	
+		$('.edit-name').editable({
+		   name: 'name',
+		   url:  editRole,
+		});		
+		$('.edit-description').editable({
+		   name: 'annotation',
+		   url: editRole,
+		});	
+	}
 	
-} );
+	function editRole(params)
+	{
+		var d = new $.Deferred;
+		params.controller =  'UsersController';
+		params.action = 'editRole';
+			
+		$.post("/AppController.php", params,
+			function(data) 
+			{
+				if (data.success)
+				{
+					d.resolve();
+					DGL_nav_reload(); // Reload page
+				}
+			},
+			'json');
+			
+		return d.promise();
+	}
+		
+	function deleteRole()
+	{
+		var id = $(this).data("role");
+		
+		$('#modal-deleterole').modal('hide');
+		$('.modal-backdrop').remove();
+		
+		DGL_nav_ajaxRequest('UsersController', 'deleteRole', { id : id })
+			.done(DGL_nav_reload);	
+	}
+	
+	function format ( d ) {
+		
+		return 	'<aside id="roles-details-' + d.id + '">' +
+					'<dl class="dl-horizontal">' +
+						'<dt>Name</dt>' +
+						'<dd><span class="edit-name" data-type="text" data-pk="' + d.id + '" data-title="Enter username">' + d.name + '</span></dd>' +
+						'<dt>Description</dt>' +
+						'<dd><span class="edit-description" data-type="text" data-pk="' + d.id + '" data-title="Edit description">' + d.annotation + '</span></dd>' +
+					'</dl>' +
+				'</aside>' +
+				'<div class="controls">' +
+					'<button data-role="' + d.id + '" class="role-control-delete btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete role"><i class="fa fa-trash fa-fw"></i></button>' +
+				'</div>';
+	}
 </script>
+
+<?php include "/elements/admin_modals.php"; ?>

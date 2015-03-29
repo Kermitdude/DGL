@@ -12,6 +12,7 @@ class AppController
 		"DigitalGaming\LoginController", 
 		"DigitalGaming\ElementsController",
 		"DigitalGaming\GamesController", 
+		"DigitalGaming\EmailController", 
 		"DigitalGaming\AdminController", 
 		"DigitalGaming\WatchController", 
 		"DigitalGaming\UsersController", 

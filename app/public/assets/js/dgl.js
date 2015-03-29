@@ -156,6 +156,37 @@ function DGL_nav_post(file, parameters, div)
 			$(div).html(data);
 		});
 }
+	
+/**
+ *  @brief DGL_nav_ajaxRequest
+ *  
+ *  @param [in] controller Parameter_Description
+ *  @param [in] action Parameter_Description
+ *  @param [in] callback Parameter_Description
+ *  @param [in] params Parameter_Description
+ *  
+ *  @details Makes an ajax request to AppController, then fulfills the Promise
+ */
+function DGL_nav_ajaxRequest(controller, action, params)
+{
+	var d = new $.Deferred;
+	
+	var parameters = {
+		"controller" : controller,
+		"action" : action,
+		"params" : params
+	};
+	
+	$.post("/AppController.php", parameters, 'json')
+		.done(function(data) {
+			d.resolve(JSON.parse(data));
+		})
+		.fail(function(data) {
+			d.reject(JSON.parse(data));
+		})
+		
+	return d.promise();		
+}
 
 /**
  *  @brief DGL_nav_reload

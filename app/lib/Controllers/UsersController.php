@@ -39,34 +39,29 @@ class UsersController
 		include $this->viewPath . 'profile.php';
 	}
 	
-	public function addUser()
+	/*************************************************************** Users */
+	
+	public function addUser($name = false, $email = false, $password = false)
 	{		
-		if (isset($_POST['name']))
+		if ($name && $email && $password)
 		{
-			if (isset($_POST['email']))
-			{
-				if (isset($_POST['password']))
-				{
-					
-					$user = new User();
-					$user->setName($_POST['name']);
-					$user->setEmail($_POST['email']);
-					$user->setPassword($user->hashPassword($_POST['password']));
-					
-					$success = $user->save();
-					$this->ajaxData['success'] = $success;
-					
-					$this->send();	
-				}
-			}
+			$user = new User();
+			$user->setName($name);
+			$user->setEmail($email);
+			$user->setPassword($password);
+			
+			$success = $user->save();
+			$this->ajaxData['success'] = $success;
+			
+			$this->send();
 		}
 	}	
 	
-	public function deleteUser()
+	public function deleteUser($id = false)
 	{		
-		if (isset($_POST['id']))
+		if ($id)
 		{
-			$user = Base\UserQuery::create()->findOneById($_POST['id']);
+			$user = Base\UserQuery::create()->findOneById($id);
 			$user->delete();
 			
 			$this->ajaxData['success'] = $user->isDeleted();
@@ -97,6 +92,43 @@ class UsersController
 				
 		$this->send();	
 	}		
+	
+	/*************************************************************** Roles */
+	
+	public function editRole()
+	{		
+		if (isset($_POST['pk']))
+		{
+			if (isset($_POST['value']))
+			{
+				$role = Base\RoleQuery::create()->findOneById($_POST['pk']);
+				
+				if (isset($_POST['name']))
+				{
+					if ($_POST['name'] === 'name') $role->setName($_POST['value']);
+					elseif ($_POST['name'] === 'annotation') $role->setAnnotation($_POST['value']);
+				}
+				
+				$success = $role->save();
+				$this->ajaxData['success'] = $success;
+			}
+		}
+				
+		$this->send();	
+	}		
+	
+	public function deleteRole($id = false)
+	{		
+		if ($id)
+		{
+			$role = Base\RoleQuery::create()->findOneById($id);
+			$role->delete();
+			
+			$this->ajaxData['success'] = $role->isDeleted();
+			
+			$this->send();	
+		}
+	}	
 	
 	protected function send()
 	{

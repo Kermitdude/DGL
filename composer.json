@@ -17,7 +17,7 @@
     "require": {
 		"propel/propel": "~2.0@dev",
 		"monolog/monolog": "~1.2",
-		"klein/klein": "~2.1"
+		"phpmailer/phpmailer": "dev-master"
     },
     "autoload": {
         "psr-4": {
