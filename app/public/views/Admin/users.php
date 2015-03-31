@@ -20,11 +20,11 @@
 		<canvas id="user-chart" style="width: 450px; height: 300px;"></canvas>
 		
 	<!-- Add user -->
-		<section class="pull-right" id="user-addnew">
+		<section class="pull-right">
+		
+			<form id="adduser-form" class='form-transparent'>
 			
-			<p><i class="fa fa-user-plus fa-3x"></i></p>
-			
-			<form id="adduser-form">
+				<p><i class="fa fa-user-plus fa-3x"></i></p>
 			
 				<!-- Username -->
 					<div class="form-group">
@@ -66,6 +66,7 @@
 			</table>
 			
 		</section>
+		
 	</main>	
 
 </div>
@@ -82,6 +83,9 @@
 		// Bind the mouse events
 		bindMouseEvents();
 		
+		// Initialize chart
+		chartInit();
+		
 		// Initialize datatable
 		var table = $('.admin #users-table').DataTable({
 			data: users,
@@ -92,25 +96,6 @@
 			]
 		});
 
-		var chartData = {
-			labels: ["January", "February", "March", "April", "May", "June", "July"],
-			datasets: [
-				{
-					label: "Number of users",
-					fillColor: "rgba(19,19,21,.5)",
-					strokeColor: "rgba(242,98,34,.9)",
-					pointColor: "rgba(242,98,34,1)",
-					pointStrokeColor: "rgba(0,0,0,.5)",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(151,187,205,1)",
-					data: [28, 48, 40, 19, 86, 27, 90]
-				}
-			]
-		};
-		
-		var ctx = $("#user-chart").get(0).getContext("2d");
-		var myNewChart = new Chart(ctx).Line(chartData);
-		
 		// Add event listener for opening and closing details
 		$('.admin #users-table tbody').on('click', 'tr:not(".row-child")', function () {
 			var row = table.row( this );
@@ -134,6 +119,30 @@
 		
 	} );
 	
+	function chartInit()
+	{
+		var userStats = <?= $userStats; ?>;
+		
+		var chartData = {
+			labels: userStats.weeks,
+			datasets: [
+				{
+					label: "Number of users",
+					fillColor: "rgba(19,19,21,.5)",
+					strokeColor: "rgba(242,98,34,.9)",
+					pointColor: "rgba(242,98,34,1)",
+					pointStrokeColor: "rgba(0,0,0,.5)",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(151,187,205,1)",
+					data: userStats.users
+				}
+			]
+		};
+		
+		var ctx = $("#user-chart").get(0).getContext("2d");
+		var myNewChart = new Chart(ctx).Line(chartData);
+	}
+	
 	function enableEdit()
 	{	
 		var roles = <?= $rolesList; ?>;	
@@ -153,6 +162,7 @@
 		$('.edit-roles').editable({
 			name: 'roles', 
 			source: roles,
+		    mode: 'inline',
 			url: editUser
 		});
 	}
@@ -176,31 +186,6 @@
 		});
 		$("#modal-resetpass-confirm").click(sendPassword);
 		
-	}
-	
-	function format ( d ) {
-				
-		return 	'<aside id="user-details-' + d.id + '">' +
-					'<figure>' +
-						'<i class="fa fa-user fa-5x"></i>' +
-					'</figure>' +
-					'<dl class="dl-horizontal">' +
-						'<dt>Name</dt>' +
-						'<dd><span class="edit-name" data-type="text" data-pk="' + d.id + '" data-title="Enter username">' + d.name + '</span></dd>' +
-						'<dt>E-mail</dt>' +
-						'<dd><span class="edit-email" data-type="email" data-pk="' + d.id + '" data-title="Enter email">' + d.email + '</span></dd>' +
-						'<dt>Password</dt>' +
-						'<dd><span class="edit-password" data-type="text" data-pk="' + d.id + '" data-title="Enter password">enter new password...</span></dd>' +
-						'<dt>Roles</dt>' +
-						'<dd><span class="edit-roles" data-type="checklist" data-value="' + d.roles.toString() + '" data-pk="' + d.id + '" data-title="Select roles">Select roles</span></dd>' +
-					'</dl>' +
-				'</aside>' +
-				'<div class="controls">' +
-					'<button data-user="' + d.id + '" class="user-control-ban btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Ban user"><i class="fa fa-ban"></i></button>' +
-					'<button data-user="' + d.id + '" class="user-control-delete btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete user"><i class="fa fa-trash fa-fw"></i></button>' +
-					'<button data-user="' + d.id + '" class="user-control-reset btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Send new password"><i class="fa fa-key"></i></button>' +
-					'<button data-user="' + d.id + '" class="user-control-send btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Send message"><i class="fa fa-envelope fa-fw"></i></button>' +
-				'</div>';
 	}
 				
 	function addUser()
@@ -230,26 +215,6 @@
 			.done(DGL_nav_reload);	
 	}
 
-	function editUser(params)
-	{
-		var d = new $.Deferred;
-		params.controller =  'UsersController';
-		params.action = 'editUser';
-			
-		$.post("/AppController.php", params,
-			function(data) 
-			{
-				if (data.success)
-				{
-					d.resolve();
-					DGL_nav_reload(); // Reload page
-				}
-			},
-			'json');
-			
-		return d.promise();
-	}
-	
 	function sendPassword()
 	{
 		var id = $(this).data('user');
@@ -262,6 +227,51 @@
 					//if (d.success) noty({ text: 'E-mail successfully sent to ' + d.name });
 				});		
 		}
+	}
+	
+	function editUser(params)
+	{
+		var d = new $.Deferred;
+		params.controller =  'UsersController';
+		params.action = 'editUser';
+			
+		$.post("/AppController.php", params,
+			function(data) 
+			{
+				if (data.success)
+				{
+					d.resolve();
+				}
+				else d.reject('Error!');
+			},
+			'json');
+			
+		return d.promise();
+	}
+	
+	function format ( d ) 
+	{
+		return 	'<aside id="user-details-' + d.id + '">' +
+					'<figure>' +
+						'<i class="fa fa-user fa-5x"></i>' +
+					'</figure>' +
+					'<dl class="dl-horizontal">' +
+						'<dt>Name</dt>' +
+						'<dd><span class="edit-name" data-type="text" data-pk="' + d.id + '" data-title="Enter username">' + d.name + '</span></dd>' +
+						'<dt>E-mail</dt>' +
+						'<dd><span class="edit-email" data-type="text" data-pk="' + d.id + '" data-title="Enter email">' + d.email + '</span></dd>' +
+						'<dt>Password</dt>' +
+						'<dd><span class="edit-password" data-type="text" data-pk="' + d.id + '" data-title="Enter password"></span></dd>' +
+						'<dt>Roles</dt>' +
+						'<dd><span class="edit-roles" data-type="checklist" data-value="' + d.roles.toString() + '" data-pk="' + d.id + '" data-title="Select roles"></span></dd>' +
+					'</dl>' +
+				'</aside>' +
+				'<div class="controls">' +
+					'<button data-user="' + d.id + '" class="user-control-ban btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Ban user"><i class="fa fa-ban"></i></button>' +
+					'<button data-user="' + d.id + '" class="user-control-delete btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete user"><i class="fa fa-trash fa-fw"></i></button>' +
+					'<button data-user="' + d.id + '" class="user-control-reset btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Send new password"><i class="fa fa-key"></i></button>' +
+					'<button data-user="' + d.id + '" class="user-control-send btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Send message"><i class="fa fa-envelope fa-fw"></i></button>' +
+				'</div>';
 	}
 </script>
 

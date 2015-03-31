@@ -217,22 +217,16 @@ function DGL_nav_loadElement(element, div)
 
 function DGL_Auth_Initiate()
 {
-	var username = $("#modal-login-username").val();
-	var password = $("#modal-login-password").val();
 	var params = { 
-			controller: 'LoginController', 
-			action    : 'login', 
-			username  : username, 
-			password  : password 
+			username  : $("#modal-login-username").val(), 
+			password  : $("#modal-login-password").val() 
 		};
 		
-	$.post("/AppController.php", params,
-		function(data) 
-		{
-			if (data.success) DGL_Auth_onLoginSuccess();
+	DGL_nav_ajaxRequest('LoginController', 'login', params)
+		.done(function(d) {
+			if (d.success) DGL_Auth_onLoginSuccess();
 			else DGL_Auth_onLoginFail();
-		},
-		'json');
+		});	
 }
 
 function DGL_Auth_Logout()

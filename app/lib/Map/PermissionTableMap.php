@@ -152,8 +152,8 @@ class PermissionTableMap extends TableMap
     0 => ':permission_id',
     1 => ':id',
   ),
-), null, null, 'RolePermissions', false);
-        $this->addRelation('Role', '\\DigitalGaming\\Role', RelationMap::MANY_TO_MANY, array(), null, null, 'Roles');
+), 'CASCADE', null, 'RolePermissions', false);
+        $this->addRelation('Role', '\\DigitalGaming\\Role', RelationMap::MANY_TO_MANY, array(), 'CASCADE', null, 'Roles');
     } // buildRelations()
 
     /**
@@ -168,6 +168,15 @@ class PermissionTableMap extends TableMap
             'auto_add_pk' => array('name' => 'id', 'autoIncrement' => 'true', 'type' => 'INTEGER', ),
         );
     } // getBehaviors()
+    /**
+     * Method to invalidate the instance pool of all tables related to permission     * by a foreign key with ON DELETE CASCADE
+     */
+    public static function clearRelatedInstancePool()
+    {
+        // Invalidate objects in related instance pools,
+        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+        RolePermissionTableMap::clearInstancePool();
+    }
 
     /**
      * Retrieves a string version of the primary key from the DB resultset row that can be used to uniquely identify a row in this table.

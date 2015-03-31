@@ -125,20 +125,17 @@
 		padding: 40px 20px 40px 20px; 
 	}
 	
-	&.admin-users
+	.form-transparent
 	{
-		#user-addnew
+		width: 400px;
+		margin-right: 50px;
+		text-align: right;
+		
+		input
 		{
-			width: 400px;
-			margin-right: 50px;
-			text-align: right;
-			
-			input
-			{
-				background: rgba($charcoal, 0.25);
-			}
+			background: rgba($charcoal, 0.25);
 		}
-	}	
+	}
 
 	.gridster
 	{
@@ -160,45 +157,5 @@
 			border: 1px solid white;
 			background: lighten($charcoal,40) !important;
 		}
-	}
-
-	#admin-dashboard-box-users-latest
-	{
-		background-color: rgb(42,159,214);
-	}
-
-	#admin-dashboard-box-analytics
-	{
-		background-color: rgb(30,30,30);
-	}
-
-	#admin-dashboard-box-users-logged
-	{
-		background-color: rgb(30,30,30);
-	}
-
-	#admin-dashboard-box-recent-entries
-	{
-		background-color: rgb(42,159,214);
-	}
-
-	#admin-dashboard-box-matches-monthly
-	{
-		background-color: rgb(30,30,30);
-	}
-
-	#admin-dashboard-box-matches-latest
-	{
-		background-color: rgb(30,30,30);
-	}
-
-	#admin-dashboard-box-errors
-	{
-		background-color: rgb(30,30,30);
-	}
-
-	#admin-dashboard-box-messages
-	{
-		background-color: rgb(42,159,214);
 	}
 }

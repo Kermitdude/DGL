@@ -147,14 +147,14 @@ class RolePermissionTableMap extends TableMap
     0 => ':role_id',
     1 => ':id',
   ),
-), null, null, null, false);
+), 'CASCADE', null, null, false);
         $this->addRelation('Permission', '\\DigitalGaming\\Permission', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
     0 => ':permission_id',
     1 => ':id',
   ),
-), null, null, null, false);
+), 'CASCADE', null, null, false);
     } // buildRelations()
 
     /**

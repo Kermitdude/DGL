@@ -3,7 +3,7 @@ propel:
       connections:
           dgl:
               adapter: mysql
-              classname: Propel\Runtime\Connection\DebugPDO
+              classname: Propel\Runtime\Connection\ProfilerConnectionWrapper
               dsn: "mysql:host=localhost;port=3306;dbname=dgl"
               user: root
               password:

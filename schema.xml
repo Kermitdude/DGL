@@ -42,10 +42,10 @@
 	<table name="role_permission" isCrossRef="true">
 		<column name="role_id" type="integer" primaryKey="true" />
 		<column name="permission_id" type="integer" primaryKey="true" />
-		<foreign-key foreignTable="role">
+		<foreign-key foreignTable="role"  onDelete="CASCADE">
 			<reference local="role_id" foreign="id"/>
 		</foreign-key>
-		<foreign-key foreignTable="permission">
+		<foreign-key foreignTable="permission" onDelete="CASCADE">
 			<reference local="permission_id" foreign="id"/>
 		</foreign-key>
 	</table>

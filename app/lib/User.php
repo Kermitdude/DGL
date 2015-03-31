@@ -64,4 +64,41 @@ class User extends BaseUser
 	{
 		return true;
     }
+	
+	public static function getRecentRegistrations()
+	{
+		$dataPointLimit = 10;
+		
+		// Get starting point
+		$users = Base\UserQuery::create()
+			->firstCreatedFirst()
+			->find();
+			
+		// Count number of users per week
+		$recent = [];
+		$recent['weeks'] = [];
+		$recent['users'] = [];
+		
+		foreach ($users as $user)
+		{
+			$created = $user->getCreatedAt();
+			$createdWeek = $created->format('W');
+			
+			if (isset($foundInWeek[$createdWeek])) $foundInWeek[$createdWeek]++;
+			else $foundInWeek[$createdWeek] = 1;
+			
+			if (count($foundInWeek) > $dataPointLimit) break; // Limit data points
+		}
+		
+		// Convert to chart.js readable format
+		foreach ($foundInWeek as $week => $users)
+		{
+			$weekStart = new \DateTime();
+			$weekStart->setISODate(date("Y"), $week);
+			$recent['weeks'][] = $weekStart->format('d-M');
+			$recent['users'][] = $users;
+		}
+		
+		return $recent;
+	}
 }

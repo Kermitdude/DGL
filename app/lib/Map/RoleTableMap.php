@@ -171,9 +171,9 @@ class RoleTableMap extends TableMap
     0 => ':role_id',
     1 => ':id',
   ),
-), null, null, 'RolePermissions', false);
+), 'CASCADE', null, 'RolePermissions', false);
         $this->addRelation('User', '\\DigitalGaming\\User', RelationMap::MANY_TO_MANY, array(), 'CASCADE', null, 'Users');
-        $this->addRelation('Permission', '\\DigitalGaming\\Permission', RelationMap::MANY_TO_MANY, array(), null, null, 'Permissions');
+        $this->addRelation('Permission', '\\DigitalGaming\\Permission', RelationMap::MANY_TO_MANY, array(), 'CASCADE', null, 'Permissions');
     } // buildRelations()
 
     /**
@@ -197,6 +197,7 @@ class RoleTableMap extends TableMap
         // Invalidate objects in related instance pools,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         UserRoleTableMap::clearInstancePool();
+        RolePermissionTableMap::clearInstancePool();
     }
 
     /**

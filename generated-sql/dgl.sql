@@ -86,10 +86,12 @@ CREATE TABLE `role_permission`
     INDEX `role_permission_fi_2b894c` (`permission_id`),
     CONSTRAINT `role_permission_fk_1ff99e`
         FOREIGN KEY (`role_id`)
-        REFERENCES `role` (`id`),
+        REFERENCES `role` (`id`)
+        ON DELETE CASCADE,
     CONSTRAINT `role_permission_fk_2b894c`
         FOREIGN KEY (`permission_id`)
         REFERENCES `permission` (`id`)
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------

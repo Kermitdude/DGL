@@ -9,10 +9,10 @@ require_once '/../generated-conf/config.php';
 DigitalGaming\Session::update(); 
 
 // Logs
-$log = new Monolog\Logger('Audit');
-$logDir = $_SERVER['DOCUMENT_ROOT'] . '../../shared/';
-$log->pushHandler(new Monolog\Handler\StreamHandler($logDir . 'audit.log', Monolog\Logger::INFO));
-Propel\Runtime\Propel::getServiceContainer()->setLogger('Audit', $log);
+$audit = new Monolog\Logger('Audit');
+$auditDir = $_SERVER['DOCUMENT_ROOT'] . '../../shared/';
+$audit->pushHandler(new Monolog\Handler\StreamHandler($auditDir . 'audit.log', Monolog\Logger::DEBUG));
+Propel\Runtime\Propel::getServiceContainer()->setLogger('Audit', $audit);
 
 // First-time install
 $installed = DigitalGaming\Setting::get("installed");

@@ -77,6 +77,47 @@ class AppController
 		die();
 	}
 	
+	protected function isAuthorized()
+	{
+		if (isset($this->instance->locked)) // Requested controller has locked actions
+		{
+			// Filter out the controller name from 'DigitalGaming\ThingyController'
+			$controller = explode('\\', $this->controller)[1];
+			$controller = str_replace('Controller', '', $controller);
+			
+			// See if user is logged
+			$id = Session::get('userid');
+			
+			if ($id && $controller)
+			{
+				if (in_array($this->action, $this->instance->locked)) // Requested method is locked
+				{
+					// Retrieve user roles
+					$user = UserQuery::create()->findOneById($id);
+					$userRoles = $user->getRoles();
+						
+					foreach ($userRoles as $role)
+					{
+						$rolePermissions = PermissionQuery::create()
+							->filterByRole($role)
+							->filterByName($controller . '.' . $this->action)
+							->count();
+							
+						if ($rolePermissions) return true; // Locked, permissions granted
+					}	
+					
+					return "You do not have permission to view this page."; // Locked, no permissions
+				}
+				
+				else return true;
+			}
+			
+			else return "You must login to view this page."; // Locked, not logged in
+		}
+		
+		return true; // Unlocked
+	}
+	
 	public function run()
 	{
 		if (in_array($this->controller, $this->controllersArray))  // Screen input
@@ -85,8 +126,15 @@ class AppController
 			
 			if (is_callable(array($this->instance, $this->action))) // Method is callable
 			{
-				$return = call_user_func_array(array($this->instance, $this->action), $this->params);
-				if ($return) $this->announce($return);
+				$authorized = $this->isAuthorized();
+				
+				if ($authorized === true)
+				{
+					$return = call_user_func_array(array($this->instance, $this->action), $this->params);
+					if ($return) $this->announce($return);
+				}
+				
+				else $this->announce($authorized);
 			}
 			else $this->notFound();
 		}

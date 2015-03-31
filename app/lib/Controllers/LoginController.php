@@ -5,15 +5,15 @@ class LoginController
 {	
 	protected $ajaxData;
 	
-	public function login()
+	public function login($username = false, $password = false)
 	{
-		if (isset($_POST['username']))
+		if ($username)
 		{
-			if (isset($_POST['password']))
+			if ($password)
 			{
 				$user = new User();
 				
-				$success = $user->login($_POST['username'], $_POST['password']);
+				$success = $user->login($username, $password);
 				
 				$this->ajaxData['success'] = $success;
 				

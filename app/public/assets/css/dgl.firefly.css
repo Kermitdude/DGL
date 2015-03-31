@@ -256,64 +256,32 @@ footer ul li {
   margin: 50px 0px 50px 0px;
   padding: 40px 20px 40px 20px;
 }
-/* line 131, sass/_admin.firefly.scss */
-.admin.admin-users #user-addnew {
+/* line 129, sass/_admin.firefly.scss */
+.admin .form-transparent {
   width: 400px;
   margin-right: 50px;
   text-align: right;
 }
-/* line 137, sass/_admin.firefly.scss */
-.admin.admin-users #user-addnew input {
+/* line 135, sass/_admin.firefly.scss */
+.admin .form-transparent input {
   background: rgba(19, 19, 21, 0.25);
 }
-/* line 147, sass/_admin.firefly.scss */
+/* line 144, sass/_admin.firefly.scss */
 .admin .gridster ul {
   margin: 50px 0px 0px -10px;
   list-style-type: none;
 }
-/* line 152, sass/_admin.firefly.scss */
+/* line 149, sass/_admin.firefly.scss */
 .admin .gridster ul li {
   -webkit-border-radius: 4px 4px;
   -moz-border-radius: 4px / 4px;
   border-radius: 4px / 4px;
   color: white;
 }
-/* line 159, sass/_admin.firefly.scss */
+/* line 156, sass/_admin.firefly.scss */
 .admin .gridster .preview-holder {
   border: 1px solid white;
   background: #747480 !important;
-}
-/* line 166, sass/_admin.firefly.scss */
-.admin #admin-dashboard-box-users-latest {
-  background-color: #2a9fd6;
-}
-/* line 171, sass/_admin.firefly.scss */
-.admin #admin-dashboard-box-analytics {
-  background-color: #1e1e1e;
-}
-/* line 176, sass/_admin.firefly.scss */
-.admin #admin-dashboard-box-users-logged {
-  background-color: #1e1e1e;
-}
-/* line 181, sass/_admin.firefly.scss */
-.admin #admin-dashboard-box-recent-entries {
-  background-color: #2a9fd6;
-}
-/* line 186, sass/_admin.firefly.scss */
-.admin #admin-dashboard-box-matches-monthly {
-  background-color: #1e1e1e;
-}
-/* line 191, sass/_admin.firefly.scss */
-.admin #admin-dashboard-box-matches-latest {
-  background-color: #1e1e1e;
-}
-/* line 196, sass/_admin.firefly.scss */
-.admin #admin-dashboard-box-errors {
-  background-color: #1e1e1e;
-}
-/* line 201, sass/_admin.firefly.scss */
-.admin #admin-dashboard-box-messages {
-  background-color: #2a9fd6;
 }
 
 /* line 4, sass/_pace.firefly.scss */
