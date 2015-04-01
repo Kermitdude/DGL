@@ -12,3 +12,8 @@ $manager->setConfiguration(array (
 $manager->setName('dgl');
 $serviceContainer->setConnectionManager('dgl', $manager);
 $serviceContainer->setDefaultDatasource('dgl');
+$serviceContainer->setLoggerConfiguration('defaultLogger', array (
+  'type' => 'stream',
+  'path' => '../../shared/audit.log',
+  'level' => 100,
+));

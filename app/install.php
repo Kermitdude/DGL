@@ -11,26 +11,44 @@
 DigitalGaming\Setting::add("installed", true);
 
 // Create role
-$superrole = new DigitalGaming\Role();
-$superrole->setName('Super');
+$installVars = [];
+
+$installVars['superrole'] = new DigitalGaming\Role();
+$installVars['superrole']->setName('Super');
+$installVars['superrole']->setAnnotation('God mode');
 
 // Create superuser
-$superuser = new DigitalGaming\User();
-$superuser->setName('Aita');
-$superuser->setEmail('aita@blacklightcommunity.org');
-$superuser->setPassword($superuser->hashPassword('admin'));
+$installVars['superuser']  = new DigitalGaming\User();
+$installVars['superuser']->setName('Aita');
+$installVars['superuser']->setEmail('aita@blacklightcommunity.org');
+$installVars['superuser']->setPassword($installVars['superuser']->hashPassword('admin'));
 
-// Create permission
-$superperm = new DigitalGaming\Permission();
-$superperm->setName('home.view');
+// Create permissions
+$installVars['adminIndex'] = new DigitalGaming\Permission();
+$installVars['adminIndex']->setName('Admin.Index');
+$installVars['adminIndex']->setAnnotation('Admin dashboard');
+
+$installVars['adminUsers'] = new DigitalGaming\Permission();
+$installVars['adminUsers']->setName('Admin.Users');
+$installVars['adminUsers']->setAnnotation('Admin users');
+
+$installVars['adminRoles'] = new DigitalGaming\Permission();
+$installVars['adminRoles']->setName('Admin.Roles');
+$installVars['adminRoles']->setAnnotation('Admin roles');
+
+$installVars['adminPermissions'] = new DigitalGaming\Permission();
+$installVars['adminPermissions']->setName('Admin.Permissions');
+$installVars['adminPermissions']->setAnnotation('Admin permissions');
 
 // Associate permission and role
-$superrole->addPermission($superperm);
-$superuser->addRole($superrole);
+$installVars['superrole']->addPermission($installVars['adminIndex']);
+$installVars['superrole']->addPermission($installVars['adminUsers']);
+$installVars['superrole']->addPermission($installVars['adminRoles']);
+$installVars['superrole']->addPermission($installVars['adminPermissions']);
 
-$superuser->save();
+$installVars['superuser']->addRole($installVars['superrole']);
 
-unset($superuser);
-unset($superrole);
-unset($superperm);
+$installVars['superuser']->save();
+
+unset($installVars);
 ?>

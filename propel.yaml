@@ -9,8 +9,11 @@ propel:
               password:
   runtime:
       defaultConnection: dgl
-      connections:
-          - dgl
+      log:
+          defaultLogger:
+             type: stream
+             path: ../../shared/audit.log
+             level: 100
   generator:
       namespaceAutoPackage: false
       defaultConnection: dgl
